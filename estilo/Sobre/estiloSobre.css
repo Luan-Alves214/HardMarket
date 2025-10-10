@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    background-color: #FAF3F3;
+    text-align: justify;
+    width: 100%;
+    margin-top: 60px;
+
+}
+.titulo{
+    text-align: center;
+    padding: 50px 0 0 0;
+}
+.titulo h1{
+    font-family: "Arial Black";
+    font-weight: bolder;
+    font-size: 40px;
+    color: #000;
+}
+.texto{
+    padding: 60px;
+}
+.texto p{
+    font-size: 27px;
+}
+
+.botaoDuvidas a{
+    text-align: center;
+    padding: 15px 25px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}

@@ -1,0 +1,228 @@
+/* Novos Produtos - Responsividade */
+.h2-card {
+    display: flex;
+    justify-content: center;
+    margin: 80px 0;
+}
+
+.h2-card h2 {
+    font-family: "Arial Black";
+    font-weight: bolder;
+    font-size: 60px;
+    color: #000;
+}
+
+.card-produto {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+}
+
+.card-produto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-img-top {
+    height: 300px;
+    object-fit: contain;
+    padding: 15px;
+    background-color: #f8f9fa;
+}
+
+.card-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-title {
+    font-size: 1rem;
+    height: 48px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.cinza {
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.dinheiro {
+    color: #04C904;
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 5px rgba(4, 201, 4, 0.3);
+}
+
+.botao {
+    background-color: #000;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 0;
+    width: 100%;
+    transition: background-color 0.3s;
+    margin-top: auto;
+}
+
+.botao:hover {
+    background-color: #333;
+    color: white;
+    border: none;
+}
+
+.preco-antigo {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.Ver-todos {
+    display: flex;
+    justify-content: center;
+    font-weight: bolder;
+    margin: 80px 0;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .gaps {
+        gap: 30px;
+    }
+}
+
+/* Busca responsiva */
+.buscarBotoes {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin: 10px 15px 20px 15px;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.buscarProduto {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: none;
+    background-color: #F2E8E8;
+    color: #6E6E6E;
+    width: 200px;
+    max-width: 100%;
+}
+
+
+/* Media Queries */
+@media (max-width: 1200px) {
+    .h2-card h2 {
+        font-size: 50px;
+    }
+
+    .card-title {
+        font-size: 13px;
+        min-height: 70px;
+    }
+}
+
+@media (max-width: 768px) {
+    .h2-card {
+        margin: 60px 0 30px 0;
+    }
+
+    .h2-card h2 {
+        font-size: 36px;
+    }
+
+    .buscarBotoes {
+        display: flex;
+        flex-direction: row;
+        margin: 10px 10px 20px 10px;
+    }
+
+    .buscarProduto {
+        width: 180px;
+        padding: 7px 12px;
+    }
+
+    .gaps {
+        gap: 20px;
+    }
+
+    .card-title {
+        font-size: 12px;
+        min-height: 60px;
+    }
+
+    .dinheiro {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 576px) {
+    .h2-card h2 {
+        font-size: 28px;
+    }
+
+    .buscarBotoes {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .buscarProduto {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .card-title {
+        font-size: 11px;
+        min-height: 55px;
+        -webkit-line-clamp: 4;
+    }
+
+    .card-body {
+        padding: 12px;
+    }
+
+    .dinheiro {
+        font-size: 22px;
+    }
+
+    .cinza {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .h2-card h2 {
+        font-size: 24px;
+    }
+
+    .card-title {
+        font-size: 10px;
+        min-height: 50px;
+    }
+
+    .container-fluid {
+        padding: 0 10px;
+    }
+}

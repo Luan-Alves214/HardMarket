@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>HardMarket - Favoritos</title>
+    <link rel="stylesheet" href="estilo/favoritos/estiloFavoritos.css">
+    <link rel="stylesheet" href="estilo/footer/footer.css">
+    <link rel="stylesheet" href="estilo/header/header.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<header class="header">
+    <div class="logo">
+        <a href="index.html">HardMarket</a>
+    </div>
+    <nav class="menu">
+        <ul>
+            <li><a href="produtos.html">Produtos</a></li>
+            <li><a href="favoritos.html">Favoritos</a></li>
+            <li><a href="vender.html" class="btn-vender">Vender</a></li>
+        </ul>
+    </nav>
+    <div class="menu-pesquisa">
+        <input type="text" placeholder="Buscar produtos" class="input-menu">
+    </div>
+    <nav class="menu-icons">
+        <ul>
+            <li><a href="carrinho.html"><img src="img/carrinho.png" alt="Carrinho"></a></li>
+            <li><a href="login.html"><img src="img/login.png" alt="Login"></a></li>
+        </ul>
+    </nav>
+</header>
+<script src="estilo/header/scriptHeader.js"></script>
+
+
+<section class="novosProdutos">
+    <div class="h2-card">
+        <h2>FAVORITOS</h2>
+    </div>
+    <div class="container-fluid">
+        <div class="row gaps">
+            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
+                <div class="card card-produto">
+                    <div class="favorite-heart" onclick="toggleFavorite(this)">
+                        <svg class="heart-icon empty" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 18.645L9.521 17.31C4.99 13.285 2 10.559 2 7.197C2 4.551 4.157 2.5 6.875 2.5C8.447 2.5 9.978 3.267 11 4.508C12.022 3.267 13.553 2.5 15.125 2.5C17.843 2.5 20 4.551 20 7.197C20 10.559 17.01 13.285 12.479 17.31L11 18.645Z"/>
+                        </svg>
+                    </div>
+                    <img src="img/produtos/SSD%20Kingston.png" class="card-img-top " alt="fotoSSD">
+                    <div class="card-body">
+                        <h5 class="card-title">SSD Kingston NV3, 1TB, M.2 NVMe</h5>
+                        <p class="card-text cinza">De: R$ 809,99 por:</p>
+                        <p class="card-text dinheiro"><strong>R$ 429,90</strong></p>
+                        <p class="card-text cinza">12x de R$ 42,15 sem juros.</p>
+
+                        <a href="verProduto.html" class="card card-produto">
+                            <button class="botao">Comprar</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center ">
+                <div class="card card-produto">
+                    <div class="favorite-heart" onclick="toggleFavorite(this)">
+                        <svg class="heart-icon empty" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 18.645L9.521 17.31C4.99 13.285 2 10.559 2 7.197C2 4.551 4.157 2.5 6.875 2.5C8.447 2.5 9.978 3.267 11 4.508C12.022 3.267 13.553 2.5 15.125 2.5C17.843 2.5 20 4.551 20 7.197C20 10.559 17.01 13.285 12.479 17.31L11 18.645Z"/>
+                        </svg>
+                    </div>
+                    <img src="img/produtos/Processador%20AMD%20Ryzen%207%205700.png" class="card-img-top "
+                         alt="fotoSSD">
+                    <div class="card-body">
+                        <h5 class="card-title">Processador AMD Ryzen 7 5700</h5>
+                        <p class="card-text cinza">De: R$ 1.659,99 por:</p>
+                        <p class="card-text dinheiro"><strong>R$ 834,90</strong></p>
+                        <p class="card-text cinza">12x de R$ 81,85 sem juros.</p>
+                        <a href="verProduto.html" class="card card-produto">
+                            <button class="botao">Comprar</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center ">
+                <div class="card card-produto">
+                    <div class="favorite-heart" onclick="toggleFavorite(this)">
+                        <svg class="heart-icon empty" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 18.645L9.521 17.31C4.99 13.285 2 10.559 2 7.197C2 4.551 4.157 2.5 6.875 2.5C8.447 2.5 9.978 3.267 11 4.508C12.022 3.267 13.553 2.5 15.125 2.5C17.843 2.5 20 4.551 20 7.197C20 10.559 17.01 13.285 12.479 17.31L11 18.645Z"/>
+                        </svg>
+                    </div>
+                    <img src="img/produtos/Placa%20Mãe%20Asus%20TUF%20Gaming%20A520M-PLUS%20II.png"
+                         class="card-img-top " alt="fotoSSD">
+                    <div class="card-body">
+                        <h5 class="card-title">Placa Mãe Asus TUF Gaming A520M-PLUS II, Chipset A520</h5>
+                        <p class="card-text cinza">De: R$ 1.009,99 por:</p>
+                        <p class="card-text dinheiro"><strong>R$ 599,90</strong></p>
+                        <p class="card-text cinza">12x de R$ 58,81 sem juros.</p>
+                        <a href="verProduto.html" class="card card-produto">
+                            <button class="botao">Comprar</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center ">
+                <div class="card card-produto">
+
+                    <div class="favorite-heart" onclick="toggleFavorite(this)">
+                        <svg class="heart-icon empty" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 18.645L9.521 17.31C4.99 13.285 2 10.559 2 7.197C2 4.551 4.157 2.5 6.875 2.5C8.447 2.5 9.978 3.267 11 4.508C12.022 3.267 13.553 2.5 15.125 2.5C17.843 2.5 20 4.551 20 7.197C20 10.559 17.01 13.285 12.479 17.31L11 18.645Z"/>
+                        </svg>
+                    </div>
+
+                    <img src="img/produtos/Placa%20de%20Vídeo%20Gigabyte%20AMD%20Radeon%20RX%209060.png"
+                         class="card-img-top " alt="fotoSSD">
+                    <div class="card-body">
+                        <h5 class="card-title">Placa de Vídeo Gigabyte AMD Radeon RX 9060 XT Gaming OC, 16GB, GDDR6</h5>
+                        <p class="card-text cinza">De: R$ 4.699,90 por:</p>
+                        <p class="card-text dinheiro"><strong>R$ 2.999,90</strong></p>
+                        <p class="card-text cinza">12x de R$ 294,11 sem juros.</p>
+                        <a href="verProduto.html" class="card card-produto">
+                            <button class="botao">Comprar</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center  card-qrcode-text">
+                <div class="card card-qrcode">
+                    <a href="https://wa.me/5518998196826?text=Ol%C3%A1%2C%20tenho%20duvidas%20sobre%20o%20site%20HardMarket%2C%20voc%C3%AA%20pode%20me%20ajudar%3F"
+                       target="_blank"><img src="img/qrcode.png" class="img-qrcode" alt="Qrcode"></a>
+                </div>
+                <div>
+                    <p class="text-qrcode">Conectando você às melhores peças de hardware com segurança e
+                        confiança</p>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center ">
+                <div class="card card-footer">
+                    <div class="titulo-contado">
+                        <h3>CONTATO</h3>
+                        <hr class="hr-titulo">
+                    </div>
+                    <form action="#" method="post" class="form-contato">
+                        <div class="nome-telefone-footer ">
+                            <input type="text" name="nome" placeholder="Nome" required>
+                            <input type="tel" name="telefone" placeholder="Telefone" required>
+                        </div>
+                        <div class="email-footer ">
+                            <input type="email" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="mensagem-footer ">
+                            <textarea name="mensagem" placeholder="Mensagem" rows="5" required></textarea>
+                        </div>
+                        <button type="submit">Fale Conosco</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footerp2">
+        <div class="logo-redesSociais">
+            <h2 class="titulo-footer">HardMarket</h2>
+            <ul class="redesSociais">
+                <li>
+                    <img src="img/redesSociais/facebook.png" alt="facebook">
+                </li>
+                <li>
+                    <img src="img/redesSociais/instagram.png" alt="instagram">
+                </li>
+                <li>
+                    <img src="img/redesSociais/whatsapp.png" alt="whatsapp">
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="ofertas-input">
+                <label>Receba ofertas exclusivas:</label>
+                <input type="text" name="text" placeholder="" required>
+                <button type="submit" class="botaoIncrever">Inscrever-se</button>
+            </div>
+        </div>
+        <div class="sobre-nos">
+            <a href="sobre.html" class="botao-sobreNosA"><h3 class="botao-sobreNos">Ver sobre nós</h3></a>
+        </div>
+        <div class="todos-direitos">
+            <div>
+                <p>HardMarket | CNPJ: 00.000.000/0001-00 | Penápolis/SP</p>
+            </div>
+            <div>
+                <p>© 2025 HardMarket. Todos os direitos reservados.</p>
+                <p>Desenvolvido por Luan Alves</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous">
+
+</script>
+<script>
+    function toggleFavorite(element) {
+        const heartIcon = element.querySelector('.heart-icon');
+
+        // Alterna entre os estados
+        if (heartIcon.classList.contains('empty')) {
+            heartIcon.classList.remove('empty');
+            heartIcon.classList.add('filled');
+            console.log('Produto favoritado!');
+        } else {
+            heartIcon.classList.remove('filled');
+            heartIcon.classList.add('empty');
+            console.log('Produto desfavoritado!');
+        }
+    }
+
+    // Inicialização - verificar se há favoritos salvos
+    document.addEventListener('DOMContentLoaded', function() {
+        // Aqui você pode adicionar lógica para carregar favoritos salvos
+        // Por exemplo, de localStorage
+    });
+</script>
+</body>
+</html>

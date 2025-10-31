@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>HardMarket - Editar Produto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo/vender/estiloVender.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo/header/header.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<header class="header">
+    <div class="logo"><a href="/">HardMarket</a></div>
+    <nav class="menu">
+        <ul>
+            <li><a href="/produtos">Produtos</a></li>
+            <li><a href="/favoritos">Favoritos</a></li>
+            <li><a href="/vender" class="btn-vender">Vender</a></li>
+        </ul>
+    </nav>
+    <div class="menu-icons">
+        <ul>
+            <li><a href="/carrinho"><img src="{{ url_for('static', filename='img/carrinho.png') }}" alt="Carrinho"></a></li>
+            <li><a href="/login"><img src="{{ url_for('static', filename='img/login.png') }}" alt="Login"></a></li>
+        </ul>
+    </div>
+</header>
+
+<section class="novosProdutos">
+    <div class="titulo">
+        <div><h2>Editar produto</h2></div>
+        <div><a class="meusProd" href="/meusProdutos">Meus produtos</a></div>
+    </div>
+    <div class="container-fluid">
+        <div class="row gaps">
+            <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center">
+                <div class="card card-produto w-100">
+                    <div for="upload-imagem" class="area-upload-imagem" id="area-upload">
+                        <img id="preview-imagem" class="preview-imagem" alt="Preview da imagem" src="{{ produto[8] if produto[8] else '' }}">
+                        <div class="icone-upload">📷</div>
+                        <div class="texto-upload">Clique para adicionar imagem do produto</div>
+                        <div class="texto-upload" style="font-size: 0.9rem; margin-top: 10px;">
+                            ou arraste e solte uma imagem aqui
+                        </div>
+                        <div class="info-imagem" id="info-imagem"></div>
+                        <button type="button" class="botao-trocar-imagem" id="botao-trocar">Trocar Imagem</button>
+                    </div>
+                    <input type="file" id="upload-imagem" class="input-upload" accept="image/*">
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center ">
+                <div class="card card-produto">
+                    <form action="/editarProduto/{{ produto[0] }}" method="post">
+                        <div class="login-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" name="nome" id="nome" placeholder="Nome do Produto" value="{{ produto[1] }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="marca" id="marca" placeholder="Marca" value="{{ produto[2] }}" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="number" name="preco" id="preco" placeholder="Preço" value="{{ produto[3] }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="modelo" id="modelo" placeholder="Modelo" value="{{ produto[7] }}" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <select name="categoria" id="categoria" required>
+                                        <option value="">Categoria</option>
+                                        {% set categorias = ["Placas de vídeo", "Processadores", "Placas-mãe", "Armazenamento", "Memória RAM", "Fontes de alimentação", "Gabinetes", "Periféricos", "Coolers e sistemas de resfriamento", "Placas de som", "Placas de rede", "Acessórios e cabos"] %}
+                                        {% for cat in categorias %}
+                                            <option value="{{ cat }}" {% if produto[6] == cat %}selected{% endif %}>{{ cat }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" name="estoque" id="estoque" placeholder="Estoque" value="{{ produto[4] }}" required>
+                                </div>
+                            </div>
+                            <div class="form-group-full">
+                                <input type="text" name="descricao" id="descricao" placeholder="Descrição" value="{{ produto[5] }}" required>
+                            </div>
+                            <div class="button-container">
+                                <button class="button1" type="submit">SALVAR ALTERAÇÕES</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center  card-qrcode-text">
+                <div class="card card-qrcode">
+                    <a href="https://wa.me/5518998196826?text=Ol%C3%A1%2C%20tenho%20duvidas%20sobre%20o%20site%20HardMarket%2C%20voc%C3%AA%20pode%20me%20ajudar%3F"
+                       target="_blank"><img src="{{ url_for('static', filename='img/qrcode.png') }}" class="img-qrcode"
+                                            alt="Qrcode"></a>
+                </div>
+                <div>
+                    <p class="text-qrcode">Conectando você às melhores peças de hardware com segurança e confiança</p>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center ">
+                <div class="card card-footer">
+                    <div class="titulo-contado">
+                        <h3>CONTATO</h3>
+                        <hr class="hr-titulo">
+                    </div>
+                    <form action="#" method="post" class="form-contato">
+                        <div class="nome-telefone-footer ">
+                            <input type="text" name="nome" placeholder="Nome" required>
+                            <input type="tel" name="telefone" placeholder="Telefone" required>
+                        </div>
+                        <div class="email-footer ">
+                            <input type="email" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="mensagem-footer ">
+                            <textarea name="mensagem" placeholder="Mensagem" rows="5" required></textarea>
+                        </div>
+                        <button type="submit">Fale Conosco</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footerp2">
+        <div class="logo-redesSociais">
+            <h2 class="titulo-footer">HardMarket</h2>
+            <ul class="redesSociais">
+                <li>
+                    <img src="{{ url_for('static', filename='img/redesSociais/facebook.png') }}" alt="facebook">
+                </li>
+                <li>
+                    <img src="{{ url_for('static', filename='img/redesSociais/instagram.png') }}" alt="instagram">
+                </li>
+                <li>
+                    <img src="{{ url_for('static', filename='img/redesSociais/whatsapp.png') }}" alt="whatsapp">
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="ofertas-input">
+                <label>Receba ofertas exclusivas:</label>
+                <input type="text" name="text" placeholder="" required>
+                <button type="submit" class="botaoIncrever">Inscrever-se</button>
+            </div>
+        </div>
+        <div class="sobre-nos">
+            <a href="/sobre" class="botao-sobreNosA"><h3 class="botao-sobreNos">Ver sobre nós</h3></a>
+        </div>
+
+        <div class="todos-direitos">
+            <div>
+                <p>HardMarket | CNPJ: 00.000.000/0001-00 | Penápolis/SP</p>
+            </div>
+            <div>
+                <p>© 2025 HardMarket. Todos os direitos reservados.</p>
+                <p>Desenvolvido por Luan Alves</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='estilo/vender/scriptvender.js') }}"></script>
+<script src="{{ url_for('static', filename='estilo/header/scriptHeader.js') }}"></script>
+</body>
+</html>

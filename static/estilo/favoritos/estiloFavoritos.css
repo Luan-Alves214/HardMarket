@@ -1,0 +1,181 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+.h2-card {
+    display: flex;
+    justify-content: center;
+    margin: 80px 0;
+}
+
+.h2-card h2 {
+    font-family: "Arial Black";
+    font-weight: bolder;
+    font-size: 60px;
+    color: #000;
+}
+
+.card-produto {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+}
+
+.card-produto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-img-top {
+    height: 300px;
+    object-fit: contain;
+    padding: 15px;
+    background-color: #f8f9fa;
+}
+
+.card-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-title,.title-Promo {
+    font-size: 1rem;
+    height: 48px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.cinza {
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.dinheiro {
+    color: #04C904;
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 5px rgba(4, 201, 4, 0.3);
+}
+
+.botao {
+    background-color: #000;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 0;
+    width: 100%;
+    transition: background-color 0.3s;
+    margin-top: auto;
+}
+
+.botao:hover {
+    background-color: #333;
+    color: white;
+    border: none;
+}
+
+.preco-antigo {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.Ver-todos {
+    display: flex;
+    justify-content: center;
+    font-weight: bolder;
+    margin: 80px 0;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .gaps {
+        gap: 30px;
+    }
+}
+
+
+.Ver-todos {
+    display: flex;
+    justify-content: center;
+    font-weight: bolder;
+    margin: 80px 0;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .h2-card h2 {
+        text-align: center;
+        font-size: 40px;
+    }
+
+    .gaps {
+        gap: 20px;
+    }
+}
+
+
+/* Estilos para o coração de favorito */
+.favorite-heart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.favorite-heart:hover {
+    background-color: rgb(255, 255, 255);
+    transform: scale(1.1);
+}
+
+.heart-icon {
+    width: 22px;
+    height: 20px;
+    transition: all 0.2s;
+}
+
+/* Coração desativado (apenas borda) */
+.heart-icon.empty {
+    fill: none;
+    stroke: #000;
+    stroke-width: 2;
+}
+
+/* Coração ativado (preenchido) */
+.heart-icon.filled {
+    fill: #ff4757;
+    stroke: #000000;
+    stroke-width: 2;
+}

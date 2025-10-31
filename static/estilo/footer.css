@@ -1,0 +1,475 @@
+/*Footer*/
+footer {
+    background: linear-gradient(to bottom,
+    #7A0202 1%,
+    #3D0101 3%,
+    #1E0000 5%,
+    #000 97%);
+    width: 100%;
+    margin-top: 140px;
+    overflow: hidden;
+}
+
+.card-qrcode {
+    max-width: 300px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-qrcode-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+}
+
+.img-qrcode {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 473/470;
+    object-fit: contain;
+}
+
+.text-qrcode {
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    padding: 0 15px;
+}
+
+.titulo-contado {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0 20px 0;
+}
+
+.titulo-contado h3 {
+    font-family: "Arial Black";
+    font-weight: bolder;
+    font-size: clamp(24px, 5vw, 30px);
+    color: white;
+    border-bottom: 2px solid white;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.card-footer {
+    background-color: #000;
+    padding: 0 15px;
+}
+
+.form-contato {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    padding: 0 15px;
+}
+
+.nome-telefone-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.nome-telefone-footer input {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.email-footer {
+    margin-bottom: 15px;
+}
+
+.email-footer input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.mensagem-footer {
+    margin-bottom: 20px;
+}
+
+.mensagem-footer textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+    min-height: 120px;
+}
+
+.form-contato button {
+    width: 100%;
+    padding: 14px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-contato button:hover {
+    background-color: #f0f0f0;
+}
+
+.form-contato input::placeholder,
+.form-contato textarea::placeholder {
+    color: #000000;
+}
+
+.form-contato input:focus,
+.form-contato textarea:focus {
+    outline: none;
+    border-color: #ff0000;
+    box-shadow: 0 0 5px rgb(255, 0, 0);
+}
+
+.footerp2 {
+    padding: 40px 20px;
+}
+
+.logo-redesSociais {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    color: #ffffff;
+    margin: 60px 20px;
+    gap: 30px;
+}
+
+.redesSociais {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+.redesSociais li {
+    list-style-type: none;
+}
+
+.redesSociais img {
+    width: 35px;
+    height: 35px;
+    transition: transform 0.3s ease;
+}
+
+.redesSociais img:hover {
+    transform: scale(1.1);
+}
+
+.ofertas-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 40px 0;
+    color: white;
+    gap: 15px;
+    padding: 0 15px;
+}
+
+.ofertas-input label {
+    font-size: clamp(14px, 3vw, 16px);
+    text-align: center;
+}
+
+.ofertas-input input {
+    background-color: #000;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    max-width: 400px;
+    width: 100%;
+    padding: 10px 8px;
+    color: #fff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+    font-size: 14px;
+}
+
+.botaoIncrever {
+    color: white;
+    background-color: #000;
+    border: 1px solid #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+}
+
+.botaoIncrever:hover {
+    background-color: #333;
+}
+
+.sobre-nos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.botao-sobreNos {
+    font-family: "Arial Black";
+    font-weight: bolder;
+    color: white;
+    font-size: clamp(18px, 4vw, 20px);
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.botao-sobreNosA {
+    text-decoration: none;
+}
+
+.botao-sobreNosA:hover .botao-sobreNos {
+    color: #ccc;
+}
+
+.titulo-footer {
+    font-family: "Arial Black";
+    font-weight: bolder;
+    color: white;
+    font-size: clamp(30px, 6vw, 40px);
+    text-align: center;
+}
+
+.todos-direitos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #ffffff;
+    text-align: center;
+    gap: 15px;
+    margin-top: 40px;
+    font-size: clamp(11px, 2.5vw, 13px);
+    padding: 0 15px;
+}
+.redesSociais li{
+    cursor: pointer;
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+    footer {
+        margin-top: 100px;
+    }
+
+    .card-qrcode-text {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .logo-redesSociais {
+        margin: 40px 20px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .ofertas-input {
+        margin: 30px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    footer {
+        margin-top: 80px;
+    }
+
+    .card-qrcode {
+        margin-top: 30px;
+        max-width: 250px;
+    }
+
+    .img-qrcode {
+        max-width: 100%;
+    }
+
+    .text-qrcode {
+        font-size: 14px;
+        padding: 0 10px;
+    }
+
+    .titulo-contado {
+        margin: 30px 0 15px 0;
+    }
+
+    .form-contato {
+        padding: 0 10px;
+    }
+
+    .nome-telefone-footer input {
+        min-width: 100%;
+    }
+
+    .logo-redesSociais {
+        flex-direction: column;
+        gap: 25px;
+        margin: 30px 15px;
+    }
+
+    .redesSociais {
+        gap: 15px;
+    }
+
+    .redesSociais img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .ofertas-input {
+        flex-direction: column;
+        gap: 15px;
+        margin: 25px 0;
+    }
+
+    .ofertas-input input {
+        max-width: 300px;
+    }
+
+    .todos-direitos {
+        margin-top: 30px;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    footer {
+        margin-top: 60px;
+    }
+
+    .card-qrcode {
+        max-width: 200px;
+        margin-top: 20px;
+    }
+
+    .card-qrcode-text {
+        gap: 15px;
+        padding: 15px 10px;
+    }
+
+    .titulo-contado {
+        margin: 20px 0 10px 0;
+    }
+
+    .titulo-contado h3 {
+        font-size: 20px;
+    }
+
+    .form-contato {
+        padding: 0 5px;
+    }
+
+    .nome-telefone-footer,
+    .email-footer,
+    .mensagem-footer {
+        margin-bottom: 10px;
+    }
+
+    .form-contato input,
+    .form-contato textarea {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .form-contato button {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .footerp2 {
+        padding: 30px 15px;
+    }
+
+    .logo-redesSociais {
+        margin: 20px 10px;
+        gap: 20px;
+    }
+
+    .titulo-footer {
+        font-size: 24px;
+    }
+
+    .redesSociais {
+        gap: 12px;
+    }
+
+    .redesSociais img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .ofertas-input {
+        margin: 20px 0;
+        gap: 12px;
+    }
+
+    .ofertas-input input {
+        max-width: 250px;
+        padding: 8px;
+    }
+
+    .botaoIncrever {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .botao-sobreNos {
+        font-size: 16px;
+    }
+
+    .todos-direitos {
+        margin-top: 20px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 380px) {
+    .card-qrcode {
+        max-width: 180px;
+    }
+
+    .text-qrcode {
+        font-size: 13px;
+    }
+
+    .titulo-contado h3 {
+        font-size: 18px;
+    }
+
+    .titulo-footer {
+        font-size: 22px;
+    }
+
+    .redesSociais img {
+        width: 22px;
+        height: 22px;
+    }
+}

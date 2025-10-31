@@ -1,0 +1,244 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 5%;
+    background-color: #fff;
+    flex-wrap: wrap;
+    gap: 15px;
+    position: relative;
+}
+
+.logo {
+    flex-shrink: 0;
+}
+
+.logo a {
+    font-family: "Arial Black";
+    font-weight: bolder;
+    font-size: 24px;
+    color: #000;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* Menu principal */
+.menu {
+    flex-shrink: 0;
+}
+
+.menu ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: #000;
+    padding: 8px 15px;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+.menu ul li a.btn-vender {
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px;
+}
+
+/* Campo de pesquisa */
+.menu-pesquisa {
+    flex: 1;
+    min-width: 200px;
+    max-width: 400px;
+    margin: 0 15px;
+}
+
+.input-menu {
+    width: 100%;
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid #eee;
+    background-color: #f8f2f2;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 14px;
+}
+
+/* Ícones */
+.menu-icons {
+    flex-shrink: 0;
+}
+
+.menu-icons ul {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-icons ul li a img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Menu hamburguer para mobile */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.menu-toggle span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: #000;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .header {
+        padding: 15px 3%;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .menu-pesquisa {
+        order: 4;
+        min-width: 100%;
+        max-width: 100%;
+        margin: 10px 0 0 0;
+    }
+
+    .input-menu {
+        width: 100%;
+    }
+}
+
+/* Tablet Pequeno */
+@media (max-width: 768px) {
+    .header {
+        padding: 12px 3%;
+    }
+
+    .logo a {
+        font-size: 20px;
+    }
+
+    .menu {
+        display: none;
+        width: 100%;
+        order: 3;
+    }
+
+    .menu.active {
+        display: block;
+    }
+
+    .menu ul {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        background: #fff;
+        border-radius: 8px;
+        padding: 10px 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .menu ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .menu ul li a {
+        display: block;
+        padding: 12px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .menu ul li:last-child a {
+        border-bottom: none;
+    }
+
+    .menu-toggle {
+        display: flex;
+        order: 2;
+    }
+
+    .menu-icons {
+        order: 1;
+        margin-left: auto;
+    }
+
+    .menu-icons ul {
+        gap: 12px;
+    }
+
+    .menu-icons ul li a img {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .header {
+        padding: 10px 3%;
+        gap: 8px;
+    }
+
+    .logo a {
+        font-size: 18px;
+    }
+
+    .input-menu {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .menu-icons ul {
+        gap: 10px;
+    }
+
+    .menu-icons ul li a img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .menu ul li a {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+/* Mobile muito pequeno */
+@media (max-width: 360px) {
+    .logo a {
+        font-size: 16px;
+    }
+
+    .menu-icons ul {
+        gap: 8px;
+    }
+
+    .menu-icons ul li a img {
+        width: 18px;
+        height: 18px;
+    }
+}

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>HardMarket - FAQ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo/faq/estiloFaq.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo/header/header.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<header class="header">
+    <div class="logo">
+        <a href="/">HardMarket</a>
+    </div>
+    <nav class="menu">
+        <ul>
+            <li><a href="/produtos">Produtos</a></li>
+            <li><a href="/favoritos">Favoritos</a></li>
+            <li><a href="/vender" class="btn-vender">Vender</a></li>
+        </ul>
+    </nav>
+    <div class="menu-pesquisa">
+        <p></p>
+    </div>
+    <nav class="menu-icons">
+        <ul>
+            <li><a href="/carrinho"><img src="{{ url_for('static', filename='img/carrinho.png') }}" alt="Carrinho"></a>
+            </li>
+            <li><a href="/login"><img src="{{ url_for('static', filename='img/login.png') }}" alt="Login"></a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="titulo">
+    <div class="h2-card">
+        <h2>PERGUNTAS FREQUENTES</h2>
+    </div>
+    <p class="text-titulo">Aqui você encontra respostas para as dúvidas mais comuns sobre como comprar, vender e
+        utilizar nosso marketplace
+        de hardware. Caso não encontre sua dúvida, entre em contato pelo nosso suporte.
+    </p>
+</section>
+
+<div class="container">
+    <div class="category-nav">
+        <button class="category-btn active" data-category="compradores">Para Compradores</button>
+        <button class="category-btn" data-category="vendedores">Para Vendedores</button>
+        <button class="category-btn" data-category="seguranca">Segurança e Pagamentos</button>
+        <button class="category-btn" data-category="pedidos">Pedidos e Entregas</button>
+        <button class="category-btn" data-category="trocas">Trocas e Devoluções</button>
+    </div>
+
+    <!-- Seção Compradores -->
+    <section id="compradores" class="faq-section active">
+        <h2 class="section-title">Para Compradores</h2>
+
+        <div class="faq-item">
+            <div class="faq-question">Como faço para comprar um produto?</div>
+            <div class="faq-answer">
+                <p>Cadastre-se, faça login, busque o produto desejado, adicione ao carrinho e finalize a compra via
+                    gateway de pagamento seguro.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Como sei que o pagamento é seguro?</div>
+            <div class="faq-answer">
+                <p>Todas as transações são feitas via gateway de pagamento, que retém o valor até a confirmação da
+                    entrega.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Posso cancelar uma compra?</div>
+            <div class="faq-answer">
+                <p>Sim, enquanto o produto não for confirmado como entregue pelo comprador. Entre em contato com nosso
+                    suporte.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Vendedores -->
+    <section id="vendedores" class="faq-section">
+        <h2 class="section-title">Para Vendedores</h2>
+
+        <div class="faq-item">
+            <div class="faq-question">Como anuncio um produto?</div>
+            <div class="faq-answer">
+                <p>Faça login, acesse a página "Vender", preencha os dados do produto, faça o upload das imagens e envie
+                    para publicação.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Quando recebo o pagamento?</div>
+            <div class="faq-answer">
+                <p>O valor é liberado pelo gateway após a confirmação de entrega do produto ao comprador.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Posso editar ou remover um anúncio?</div>
+            <div class="faq-answer">
+                <p>Sim, acesse sua conta, vá em "Meus Produtos" e escolha editar ou excluir o produto.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Segurança e Pagamentos -->
+    <section id="seguranca" class="faq-section">
+        <h2 class="section-title">Segurança e Pagamentos</h2>
+
+        <div class="faq-item">
+            <div class="faq-question">Meus dados estão protegidos?</div>
+            <div class="faq-answer">
+                <p>Sim, todas as informações pessoais e financeiras são criptografadas e armazenadas com segurança.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">O que devo fazer em caso de problema com um vendedor/comprador?</div>
+            <div class="faq-answer">
+                <p>Entre em contato pelo formulário de suporte na página "Contato". Nossa equipe analisará a
+                    situação.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Quais formas de pagamento são aceitas?</div>
+            <div class="faq-answer">
+                <p>Aceitamos cartão de crédito, boleto bancário e Pix.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">É possível parcelar compras?</div>
+            <div class="faq-answer">
+                <p>Sim, compras com cartão de crédito podem ser parceladas em até 12x.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Como funciona o reembolso?</div>
+            <div class="faq-answer">
+                <p>Em casos de cancelamento ou devolução, o reembolso é feito pelo mesmo método de pagamento utilizado
+                    na compra.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Pedidos e Entregas -->
+    <section id="pedidos" class="faq-section">
+        <h2 class="section-title">Pedidos e Entregas</h2>
+
+        <div class="faq-item">
+            <div class="faq-question">Qual o prazo de entrega?</div>
+            <div class="faq-answer">
+                <p>O prazo depende da localização do comprador e da forma de envio escolhida pelo vendedor.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Como posso rastrear meu pedido?</div>
+            <div class="faq-answer">
+                <p>Você receberá um código de rastreio assim que o produto for enviado.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">O que fazer se meu pedido atrasar?</div>
+            <div class="faq-answer">
+                <p>Entre em contato pelo Suporte para que possamos verificar com o vendedor.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Trocas e Devoluções -->
+    <section id="trocas" class="faq-section">
+        <h2 class="section-title">Trocas e Devoluções</h2>
+
+        <div class="faq-item">
+            <div class="faq-question">Posso devolver um produto se não gostar?</div>
+            <div class="faq-answer">
+                <p>Sim, desde que esteja dentro do prazo de 7 dias corridos após o recebimento.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Quem paga o frete da devolução?</div>
+            <div class="faq-answer">
+                <p>Na maioria dos casos, o vendedor arca com o frete se for defeito. Caso seja arrependimento da compra,
+                    pode ser responsabilidade do comprador.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Como recebo meu estorno?</div>
+            <div class="faq-answer">
+                <p>Após aprovação da devolução, o valor será reembolsado pelo mesmo método de pagamento utilizado.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center  card-qrcode-text">
+                <div class="card card-qrcode">
+                    <a href="https://wa.me/5518998196826?text=Ol%C3%A1%2C%20tenho%20duvidas%20sobre%20o%20site%20HardMarket%2C%20voc%C3%AA%20pode%20me%20ajudar%3F"
+                       target="_blank"><img src="{{ url_for('static', filename='img/qrcode.png') }}" class="img-qrcode"
+                                            alt="Qrcode"></a>
+                </div>
+                <div>
+                    <p class="text-qrcode">Conectando você às melhores peças de hardware com segurança e confiança</p>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center ">
+                <div class="card card-footer">
+                    <div class="titulo-contado">
+                        <h3>CONTATO</h3>
+                        <hr class="hr-titulo">
+                    </div>
+                    <form action="#" method="post" class="form-contato">
+                        <div class="nome-telefone-footer ">
+                            <input type="text" name="nome" placeholder="Nome" required>
+                            <input type="tel" name="telefone" placeholder="Telefone" required>
+                        </div>
+                        <div class="email-footer ">
+                            <input type="email" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="mensagem-footer ">
+                            <textarea name="mensagem" placeholder="Mensagem" rows="5" required></textarea>
+                        </div>
+                        <button type="submit">Fale Conosco</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footerp2">
+        <div class="logo-redesSociais">
+            <h2 class="titulo-footer">HardMarket</h2>
+            <ul class="redesSociais">
+                <li>
+                    <img src="{{ url_for('static', filename='img/redesSociais/facebook.png') }}" alt="facebook">
+                </li>
+                <li>
+                    <img src="{{ url_for('static', filename='img/redesSociais/instagram.png') }}" alt="instagram">
+                </li>
+                <li>
+                    <img src="{{ url_for('static', filename='img/redesSociais/whatsapp.png') }}" alt="whatsapp">
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="ofertas-input">
+                <label>Receba ofertas exclusivas:</label>
+                <input type="text" name="text" placeholder="" required>
+                <button type="submit" class="botaoIncrever">Inscrever-se</button>
+            </div>
+        </div>
+        <div class="sobre-nos">
+            <a href="/sobre" class="botao-sobreNosA"><h3 class="botao-sobreNos">Ver sobre nós</h3></a>
+        </div>
+
+        <div class="todos-direitos">
+            <div>
+                <p>HardMarket | CNPJ: 00.000.000/0001-00 | Penápolis/SP</p>
+            </div>
+            <div>
+                <p>© 2025 HardMarket. Todos os direitos reservados.</p>
+                <p>Desenvolvido por Luan Alves</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='estilo/faq/scriptFaq.js') }}"></script>
+</body>
+</html>

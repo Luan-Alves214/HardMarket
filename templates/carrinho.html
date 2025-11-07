@@ -27,7 +27,8 @@
     </div>
     <nav class="menu-icons">
         <ul>
-            <li><a href="/carrinho"><img src="{{ url_for('static', filename='img/carrinho.png') }}" alt="Carrinho"></a></li>
+            <li><a href="/carrinho"><img src="{{ url_for('static', filename='img/carrinho.png') }}" alt="Carrinho"></a>
+            </li>
             <li><a href="/login"><img src="{{ url_for('static', filename='img/login.png') }}" alt="Login"></a></li>
         </ul>
     </nav>
@@ -38,63 +39,47 @@
         <h2 class="section-title">Produtos</h2>
 
         <!-- Produto 1 -->
-        <div class="product-item">
-            <div class="product-image">
-                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Produto">
-            </div>
-            <div class="product-details">
-                <h3 class="product-name">Nome do Produto 1</h3>
-                <p class="product-price">R$ 49,90</p>
-                <div class="quantity-controls">
-                    <button class="quantity-btn">-</button>
-                    <span class="quantity">1</span>
-                    <button class="quantity-btn">+</button>
+        {% if carrinho %}
+            {% for item in carrinho %}
+                <div class="product-item">
+                    <div class="product-image">
+                        <img src="{{ item.imagem }}" alt="{{ item.nome }}">
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-name">{{ item.nome }}</h3>
+                        <p class="product-price">R$ {{ "%.2f"|format(item.preco) }}</p>
+                        {#                        <div class="quantity-controls">#}
+                        {#                            <span class="quantity">Quantidade: {{ item.quantidade }}</span>#}
+                        {#                        </div>#}
+                        <div class="quantity-controls">
+                            <div class="quantity-buttons">
+                                <a href="{{ url_for('produto_bp.diminuir_quantidade', id_produto=item.id) }}"
+                                   class="btn-quantity btn-minus">
+                                    -
+                                </a>
+                                <span class="quantity">{{ item.quantidade }}</span>
+                                <a href="{{ url_for('produto_bp.aumentar_quantidade', id_produto=item.id) }}"
+                                   class="btn-quantity btn-plus">
+                                    +
+                                </a>
+                            </div>
+                        </div>
+                        <a href="{{ url_for('produto_bp.remover_item', id_produto=item.id) }}" class="remove-btn">Remover</a>
+                    </div>
                 </div>
-                <button class="remove-btn">Remover</button>
-            </div>
-        </div>
+            {% endfor %}
+        {% else %}
+            <p>Seu carrinho está vazio.</p>
+        {% endif %}
 
-        <!-- Produto 2 -->
-        <div class="product-item">
-            <div class="product-image">
-                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Produto">
-            </div>
-            <div class="product-details">
-                <h3 class="product-name">Nome do Produto 2</h3>
-                <p class="product-price">R$ 79,90</p>
-                <div class="quantity-controls">
-                    <button class="quantity-btn">-</button>
-                    <span class="quantity">2</span>
-                    <button class="quantity-btn">+</button>
-                </div>
-                <button class="remove-btn">Remover</button>
-            </div>
-        </div>
-
-        <!-- Produto 3 -->
-        <div class="product-item">
-            <div class="product-image">
-                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Produto">
-            </div>
-            <div class="product-details">
-                <h3 class="product-name">Nome do Produto 3</h3>
-                <p class="product-price">R$ 29,90</p>
-                <div class="quantity-controls">
-                    <button class="quantity-btn">-</button>
-                    <span class="quantity">1</span>
-                    <button class="quantity-btn">+</button>
-                </div>
-                <button class="remove-btn">Remover</button>
-            </div>
-        </div>
     </section>
 
     <section class="summary-section">
         <h2 class="section-title">Resumo da Compra</h2>
 
         <div class="summary-item">
-            <span class="summary-label">Produtos (0)</span>
-            <span class="summary-value">R$ 159,70</span>
+            <span class="summary-label">Produtos ({{ total_itens }})</span>
+            <span class="summary-value">R$ {{ "%.2f"|format(total_valor) }}</span>
         </div>
 
         <div class="summary-item">
@@ -104,7 +89,7 @@
 
         <div class="summary-item total">
             <span>Total</span>
-            <span>R$ 159,70</span>
+            <span>R$ {{ "%.2f"|format(total_valor) }}</span>
         </div>
 
         <a href="/entrega" class="continue-btn">Continuar a Compra</a>
@@ -117,7 +102,8 @@
             <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center  card-qrcode-text">
                 <div class="card card-qrcode">
                     <a href="https://wa.me/5518998196826?text=Ol%C3%A1%2C%20tenho%20duvidas%20sobre%20o%20site%20HardMarket%2C%20voc%C3%AA%20pode%20me%20ajudar%3F"
-                       target="_blank"><img src="{{ url_for('static', filename='img/qrcode.png') }}" class="img-qrcode" alt="Qrcode"></a>
+                       target="_blank"><img src="{{ url_for('static', filename='img/qrcode.png') }}" class="img-qrcode"
+                                            alt="Qrcode"></a>
                 </div>
                 <div>
                     <p class="text-qrcode">Conectando você às melhores peças de hardware com segurança e confiança</p>

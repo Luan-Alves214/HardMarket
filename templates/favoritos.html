@@ -27,7 +27,8 @@
     </div>
     <nav class="menu-icons">
         <ul>
-            <li><a href="/carrinho"><img src="{{ url_for('static', filename='img/carrinho.png') }}" alt="Carrinho"></a></li>
+            <li><a href="/carrinho"><img src="{{ url_for('static', filename='img/carrinho.png') }}" alt="Carrinho"></a>
+            </li>
             <li><a href="/login"><img src="{{ url_for('static', filename='img/login.png') }}" alt="Login"></a></li>
         </ul>
     </nav>
@@ -40,90 +41,34 @@
     </div>
     <div class="container-fluid">
         <div class="row gaps">
-            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
-                <div class="card card-produto">
-                    <div class="favorite-heart" onclick="toggleFavorite(this)">
-                        <svg class="heart-icon empty" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11 18.645L9.521 17.31C4.99 13.285 2 10.559 2 7.197C2 4.551 4.157 2.5 6.875 2.5C8.447 2.5 9.978 3.267 11 4.508C12.022 3.267 13.553 2.5 15.125 2.5C17.843 2.5 20 4.551 20 7.197C20 10.559 17.01 13.285 12.479 17.31L11 18.645Z"/>
-                        </svg>
+            {% if favoritos %}
+                {% for produto in favoritos %}
+                    <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
+                        <div class="card card-produto">
+                            <div class="favorite-heart">
+                                <a href="{{ url_for('produto_bp.remover_favorito', id_produto=produto[0]) }}">
+                                    <svg class="heart-icon filled" viewBox="0 0 22 20">
+                                        <path d="M11 18.645L9.521 17.31C4.99 13.285 2 10.559 2 7.197C2 4.551 4.157 2.5 6.875 2.5C8.447 2.5 9.978 3.267 11 4.508C12.022 3.267 13.553 2.5 15.125 2.5C17.843 2.5 20 4.551 20 7.197C20 10.559 17.01 13.285 12.479 17.31L11 18.645Z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <img src="{{ url_for('produto_bp.imagem', id=produto[0]) }}" class="card-img-top"
+                                 alt="{{ produto[1] }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ produto[1] }}</h5>
+                                <p class="card-text dinheiro"><strong>R$ {{ produto[2] }}</strong></p>
+                                <a href="{{ url_for('produto_bp.verProduto', id_produto=produto[0]) }}">
+                                    <button class="botao">Ver Produto</button>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <img src="{{ url_for('static', filename='img/produtos/Ssd.png') }}" class="card-img-top " alt="fotoSSD">
-                    <div class="card-body">
-                        <h5 class="card-title">SSD Kingston NV3, 1TB, M.2 NVMe</h5>
-                        <p class="card-text cinza">De: R$ 809,99 por:</p>
-                        <p class="card-text dinheiro"><strong>R$ 429,90</strong></p>
-                        <p class="card-text cinza">12x de R$ 42,15 sem juros.</p>
-
-                        <a href="/verProduto" class="card card-produto">
-                            <button class="botao">Comprar</button>
-                        </a>
-                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-12">
+                    <p class="text-center">Nenhum produto favorito ainda</p>
                 </div>
-            </div>
-
-
-            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center ">
-                <div class="card card-produto">
-                    <div class="favorite-heart" onclick="toggleFavorite(this)">
-                        <svg class="heart-icon empty" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11 18.645L9.521 17.31C4.99 13.285 2 10.559 2 7.197C2 4.551 4.157 2.5 6.875 2.5C8.447 2.5 9.978 3.267 11 4.508C12.022 3.267 13.553 2.5 15.125 2.5C17.843 2.5 20 4.551 20 7.197C20 10.559 17.01 13.285 12.479 17.31L11 18.645Z"/>
-                        </svg>
-                    </div>
-                    <img src="{{ url_for('static', filename='img/produtos/Processador.png') }}" class="card-img-top "
-                         alt="fotoProcessador">
-                    <div class="card-body">
-                        <h5 class="card-title">Processador AMD Ryzen 7 5700</h5>
-                        <p class="card-text cinza">De: R$ 1.659,99 por:</p>
-                        <p class="card-text dinheiro"><strong>R$ 834,90</strong></p>
-                        <p class="card-text cinza">12x de R$ 81,85 sem juros.</p>
-                        <a href="/verProduto" class="card card-produto">
-                            <button class="botao">Comprar</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center ">
-                <div class="card card-produto">
-                    <div class="favorite-heart" onclick="toggleFavorite(this)">
-                        <svg class="heart-icon empty" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11 18.645L9.521 17.31C4.99 13.285 2 10.559 2 7.197C2 4.551 4.157 2.5 6.875 2.5C8.447 2.5 9.978 3.267 11 4.508C12.022 3.267 13.553 2.5 15.125 2.5C17.843 2.5 20 4.551 20 7.197C20 10.559 17.01 13.285 12.479 17.31L11 18.645Z"/>
-                        </svg>
-                    </div>
-                    <img src="{{ url_for('static', filename='img/produtos/Placamae.png') }}"
-                         class="card-img-top " alt="fotoPlacaMae">
-                    <div class="card-body">
-                        <h5 class="card-title">Placa Mãe Asus TUF Gaming A520M-PLUS II, Chipset A520</h5>
-                        <p class="card-text cinza">De: R$ 1.009,99 por:</p>
-                        <p class="card-text dinheiro"><strong>R$ 599,90</strong></p>
-                        <p class="card-text cinza">12x de R$ 58,81 sem juros.</p>
-                        <a href="/verProduto" class="card card-produto">
-                            <button class="botao">Comprar</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center ">
-                <div class="card card-produto">
-
-                    <div class="favorite-heart" onclick="toggleFavorite(this)">
-                        <svg class="heart-icon empty" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11 18.645L9.521 17.31C4.99 13.285 2 10.559 2 7.197C2 4.551 4.157 2.5 6.875 2.5C8.447 2.5 9.978 3.267 11 4.508C12.022 3.267 13.553 2.5 15.125 2.5C17.843 2.5 20 4.551 20 7.197C20 10.559 17.01 13.285 12.479 17.31L11 18.645Z"/>
-                        </svg>
-                    </div>
-
-                    <img src="{{ url_for('static', filename='img/produtos/Placadevideo.png') }}"
-                         class="card-img-top " alt="fotoPlacadeVideo">
-                    <div class="card-body">
-                        <h5 class="card-title">Placa de Vídeo Gigabyte AMD Radeon RX 9060 XT Gaming OC, 16GB, GDDR6</h5>
-                        <p class="card-text cinza">De: R$ 4.699,90 por:</p>
-                        <p class="card-text dinheiro"><strong>R$ 2.999,90</strong></p>
-                        <p class="card-text cinza">12x de R$ 294,11 sem juros.</p>
-                        <a href="/verProduto" class="card card-produto">
-                            <button class="botao">Comprar</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            {% endif %}
         </div>
     </div>
 </section>
@@ -135,7 +80,8 @@
             <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center  card-qrcode-text">
                 <div class="card card-qrcode">
                     <a href="https://wa.me/5518998196826?text=Ol%C3%A1%2C%20tenho%20duvidas%20sobre%20o%20site%20HardMarket%2C%20voc%C3%AA%20pode%20me%20ajudar%3F"
-                       target="_blank"><img src="{{ url_for('static', filename='img/qrcode.png') }}" class="img-qrcode" alt="Qrcode"></a>
+                       target="_blank"><img src="{{ url_for('static', filename='img/qrcode.png') }}" class="img-qrcode"
+                                            alt="Qrcode"></a>
                 </div>
                 <div>
                     <p class="text-qrcode">Conectando você às melhores peças de hardware com segurança e confiança</p>
@@ -173,10 +119,10 @@
                     <img src="{{ url_for('static', filename='img/redesSociais/facebook.png') }}" alt="facebook">
                 </li>
                 <li>
-                    <img  src="{{ url_for('static', filename='img/redesSociais/instagram.png') }}" alt="instagram">
+                    <img src="{{ url_for('static', filename='img/redesSociais/instagram.png') }}" alt="instagram">
                 </li>
                 <li>
-                    <img  src="{{ url_for('static', filename='img/redesSociais/whatsapp.png') }}" alt="whatsapp">
+                    <img src="{{ url_for('static', filename='img/redesSociais/whatsapp.png') }}" alt="whatsapp">
                 </li>
             </ul>
         </div>
@@ -209,7 +155,6 @@
 </script>
 <script src="{{ url_for('static', filename='estilo/header/scriptHeader.js') }}"></script>
 <script src="{{ url_for('static', filename='estilo/favoritos/scriptFavoritos.js') }}"></script>
-
 
 
 </body>

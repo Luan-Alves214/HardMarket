@@ -29,7 +29,8 @@
     </div>
     <nav class="menu-icons">
         <ul>
-            <li><a href="/carrinho"><img src="{{ url_for('static', filename='img/carrinho.png') }}" alt="Carrinho"></a></li>
+            <li><a href="/carrinho"><img src="{{ url_for('static', filename='img/carrinho.png') }}" alt="Carrinho"></a>
+            </li>
             <li><a href="/login"><img src="{{ url_for('static', filename='img/login.png') }}" alt="Login"></a></li>
         </ul>
     </nav>
@@ -59,35 +60,35 @@
                         </div>
                     </div>
 
-<!--                    &lt;!&ndash;MP&ndash;&gt;-->
-<!--                    <div>-->
-<!--                        <form id="form-checkout" action="/process_payment" method="POST">-->
-<!--                            <div id="form-checkout__cardNumber" class="containerMP"></div>-->
-<!--                            <div id="form-checkout__expirationDate" class="containerMP"></div>-->
-<!--                            <div id="form-checkout__securityCode" class="containerMP"></div>-->
-<!--                            <input type="text" id="form-checkout__cardholderName" placeholder="Titular do cartão"/>-->
-<!--                            <select id="form-checkout__issuer" name="issuer">-->
-<!--                                <option value="" disabled selected>Banco emissor</option>-->
-<!--                            </select>-->
-<!--                            <select id="form-checkout__installments" name="installments">-->
-<!--                                <option value="" disabled selected>Parcelas</option>-->
-<!--                            </select>-->
-<!--                            <select id="form-checkout__identificationType" name="identificationType">-->
-<!--                                <option value="" disabled selected>Tipo de documento</option>-->
-<!--                            </select>-->
-<!--                            <input type="text" id="form-checkout__identificationNumber" name="identificationNumber"-->
-<!--                                   placeholder="Número do documento"/>-->
-<!--                            <input type="email" id="form-checkout__email" name="email" placeholder="E-mail"/>-->
+                    <!--                    &lt;!&ndash;MP&ndash;&gt;-->
+                    <!--                    <div>-->
+                    <!--                        <form id="form-checkout" action="/process_payment" method="POST">-->
+                    <!--                            <div id="form-checkout__cardNumber" class="containerMP"></div>-->
+                    <!--                            <div id="form-checkout__expirationDate" class="containerMP"></div>-->
+                    <!--                            <div id="form-checkout__securityCode" class="containerMP"></div>-->
+                    <!--                            <input type="text" id="form-checkout__cardholderName" placeholder="Titular do cartão"/>-->
+                    <!--                            <select id="form-checkout__issuer" name="issuer">-->
+                    <!--                                <option value="" disabled selected>Banco emissor</option>-->
+                    <!--                            </select>-->
+                    <!--                            <select id="form-checkout__installments" name="installments">-->
+                    <!--                                <option value="" disabled selected>Parcelas</option>-->
+                    <!--                            </select>-->
+                    <!--                            <select id="form-checkout__identificationType" name="identificationType">-->
+                    <!--                                <option value="" disabled selected>Tipo de documento</option>-->
+                    <!--                            </select>-->
+                    <!--                            <input type="text" id="form-checkout__identificationNumber" name="identificationNumber"-->
+                    <!--                                   placeholder="Número do documento"/>-->
+                    <!--                            <input type="email" id="form-checkout__email" name="email" placeholder="E-mail"/>-->
 
-<!--                            <input id="token" name="token" type="hidden">-->
-<!--                            <input id="paymentMethodId" name="paymentMethodId" type="hidden">-->
-<!--                            <input id="transactionAmount" name="transactionAmount" type="hidden" value="100">-->
-<!--                            <input id="description" name="description" type="hidden" value="Nome do Produto">-->
+                    <!--                            <input id="token" name="token" type="hidden">-->
+                    <!--                            <input id="paymentMethodId" name="paymentMethodId" type="hidden">-->
+                    <!--                            <input id="transactionAmount" name="transactionAmount" type="hidden" value="100">-->
+                    <!--                            <input id="description" name="description" type="hidden" value="Nome do Produto">-->
 
-<!--                            <button type="submit" id="form-checkout__submit">Pagar</button>-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash;MP&ndash;&gt;-->
+                    <!--                            <button type="submit" id="form-checkout__submit">Pagar</button>-->
+                    <!--                        </form>-->
+                    <!--                    </div>-->
+                    <!--                    &lt;!&ndash;MP&ndash;&gt;-->
 
                     <!-- Formulário do cartão (aparece quando selecionado) -->
                     <!--                    <div class="card-form" id="card-form" style="display: none;">-->
@@ -124,7 +125,7 @@
             </div>
 
             <div class="btn-continuar">
-                <a href="/confimacaoPagamento" class="continue-btn">Continuar</a>
+                <a href="/confirmacaoPagamento" class="continue-btn">Continuar</a>
             </div>
         </section>
 
@@ -132,8 +133,8 @@
             <h2 class="section-title">Resumo da Compra</h2>
 
             <div class="summary-item">
-                <span class="summary-label">Produtos (0)</span>
-                <span class="summary-value">R$ 159,70</span>
+                <span class="summary-label">Produtos ({{ total_itens }})</span>
+                <span class="summary-value">R$ {{ "%.2f"|format(total_valor) }}</span>
             </div>
 
             <div class="summary-item">
@@ -143,7 +144,7 @@
 
             <div class="summary-item total">
                 <span>Total</span>
-                <span>R$ 159,70</span>
+                <span>R$ {{ "%.2f"|format(total_valor) }}</span>
             </div>
         </section>
     </div>
@@ -155,7 +156,8 @@
             <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center  card-qrcode-text">
                 <div class="card card-qrcode">
                     <a href="https://wa.me/5518998196826?text=Ol%C3%A1%2C%20tenho%20duvidas%20sobre%20o%20site%20HardMarket%2C%20voc%C3%AA%20pode%20me%20ajudar%3F"
-                       target="_blank"><img src="{{ url_for('static', filename='img/qrcode.png') }}" class="img-qrcode" alt="Qrcode"></a>
+                       target="_blank"><img src="{{ url_for('static', filename='img/qrcode.png') }}" class="img-qrcode"
+                                            alt="Qrcode"></a>
                 </div>
                 <div>
                     <p class="text-qrcode">Conectando você às melhores peças de hardware com segurança e confiança</p>
@@ -193,10 +195,10 @@
                     <img src="{{ url_for('static', filename='img/redesSociais/facebook.png') }}" alt="facebook">
                 </li>
                 <li>
-                    <img  src="{{ url_for('static', filename='img/redesSociais/instagram.png') }}" alt="instagram">
+                    <img src="{{ url_for('static', filename='img/redesSociais/instagram.png') }}" alt="instagram">
                 </li>
                 <li>
-                    <img  src="{{ url_for('static', filename='img/redesSociais/whatsapp.png') }}" alt="whatsapp">
+                    <img src="{{ url_for('static', filename='img/redesSociais/whatsapp.png') }}" alt="whatsapp">
                 </li>
             </ul>
         </div>

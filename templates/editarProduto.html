@@ -22,7 +22,8 @@
     </nav>
     <div class="menu-icons">
         <ul>
-            <li><a href="/carrinho"><img src="{{ url_for('static', filename='img/carrinho.png') }}" alt="Carrinho"></a></li>
+            <li><a href="/carrinho"><img src="{{ url_for('static', filename='img/carrinho.png') }}" alt="Carrinho"></a>
+            </li>
             <li><a href="/login"><img src="{{ url_for('static', filename='img/login.png') }}" alt="Login"></a></li>
         </ul>
     </div>
@@ -34,41 +35,46 @@
         <div><a class="meusProd" href="/meusProdutos">Meus produtos</a></div>
     </div>
     <div class="container-fluid">
-        <div class="row gaps">
-            <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center">
-                <div class="card card-produto w-100">
-                    <div for="upload-imagem" class="area-upload-imagem" id="area-upload">
-                        <img id="preview-imagem" class="preview-imagem" alt="Preview da imagem" src="{{ produto[8] if produto[8] else '' }}">
-                        <div class="icone-upload">📷</div>
-                        <div class="texto-upload">Clique para adicionar imagem do produto</div>
-                        <div class="texto-upload" style="font-size: 0.9rem; margin-top: 10px;">
-                            ou arraste e solte uma imagem aqui
+        <form action="/editarProduto/{{ produto[0] }}" method="post" enctype="multipart/form-data">
+            <div class="row gaps">
+                <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center">
+                    <div class="card card-produto w-100">
+                        <div for="upload-imagem" class="area-upload-imagem" id="area-upload">
+                            <img id="preview-imagem" class="preview-imagem" alt="Preview da imagem"
+                                 src="{{ produto[8] if produto[8] else '' }}">
+                            <div class="icone-upload">📷</div>
+                            <div class="texto-upload">Clique para adicionar imagem do produto</div>
+                            <div class="texto-upload" style="font-size: 0.9rem; margin-top: 10px;">
+                                ou arraste e solte uma imagem aqui
+                            </div>
+                            <div class="info-imagem" id="info-imagem"></div>
+                            <button type="button" class="botao-trocar-imagem" id="botao-trocar">Trocar Imagem</button>
                         </div>
-                        <div class="info-imagem" id="info-imagem"></div>
-                        <button type="button" class="botao-trocar-imagem" id="botao-trocar">Trocar Imagem</button>
+                        <input type="file" id="upload-imagem" name="imagem-produto" class="input-upload" accept="image/*">
                     </div>
-                    <input type="file" id="upload-imagem" class="input-upload" accept="image/*">
                 </div>
-            </div>
 
-            <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center ">
-                <div class="card card-produto">
-                    <form action="/editarProduto/{{ produto[0] }}" method="post">
+                <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center ">
+                    <div class="card card-produto">
                         <div class="login-form">
                             <div class="form-row">
                                 <div class="form-group">
-                                    <input type="text" name="nome" id="nome" placeholder="Nome do Produto" value="{{ produto[1] }}" required>
+                                    <input type="text" name="nome" id="nome" placeholder="Nome do Produto"
+                                           value="{{ produto[1] }}" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="marca" id="marca" placeholder="Marca" value="{{ produto[2] }}" required>
+                                    <input type="text" name="marca" id="marca" placeholder="Marca"
+                                           value="{{ produto[2] }}" required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
-                                    <input type="number" name="preco" id="preco" placeholder="Preço" value="{{ produto[3] }}" required>
+                                    <input type="number" name="preco" id="preco" placeholder="Preço"
+                                           value="{{ produto[3] }}" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="modelo" id="modelo" placeholder="Modelo" value="{{ produto[7] }}" required>
+                                    <input type="text" name="modelo" id="modelo" placeholder="Modelo"
+                                           value="{{ produto[7] }}" required>
                                 </div>
                             </div>
                             <div class="form-row">
@@ -77,25 +83,28 @@
                                         <option value="">Categoria</option>
                                         {% set categorias = ["Placas de vídeo", "Processadores", "Placas-mãe", "Armazenamento", "Memória RAM", "Fontes de alimentação", "Gabinetes", "Periféricos", "Coolers e sistemas de resfriamento", "Placas de som", "Placas de rede", "Acessórios e cabos"] %}
                                         {% for cat in categorias %}
-                                            <option value="{{ cat }}" {% if produto[6] == cat %}selected{% endif %}>{{ cat }}</option>
+                                            <option value="{{ cat }}"
+                                                    {% if produto[6] == cat %}selected{% endif %}>{{ cat }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <input type="number" name="estoque" id="estoque" placeholder="Estoque" value="{{ produto[4] }}" required>
+                                    <input type="number" name="estoque" id="estoque" placeholder="Estoque"
+                                           value="{{ produto[4] }}" required>
                                 </div>
                             </div>
                             <div class="form-group-full">
-                                <input type="text" name="descricao" id="descricao" placeholder="Descrição" value="{{ produto[5] }}" required>
+                                <input type="text" name="descricao" id="descricao" placeholder="Descrição"
+                                       value="{{ produto[5] }}" required>
                             </div>
                             <div class="button-container">
                                 <button class="button1" type="submit">SALVAR ALTERAÇÕES</button>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </section>
 

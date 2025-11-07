@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, redirect, session
 from Rotas import usuario_bp, produto_bp
 import psycopg2
 
-import secrets
-
 
 def ligar_banco():
     banco = psycopg2.connect(
@@ -17,9 +15,7 @@ def ligar_banco():
 
 app = Flask(__name__)
 
-senha = secrets.token_hex(10)
-
-app.secret_key = senha
+app.secret_key = "HardSenhaSegura"
 
 app.register_blueprint(usuario_bp.bp)
 app.register_blueprint(produto_bp.bp)
@@ -40,15 +36,8 @@ def cadastro():
     return render_template('cadastro.html')
 
 
-@app.route('/carrinho')
-def carrinho():
-    if 'Usuario_Logado' not in session:
-        return redirect('/login')
-    return render_template('carrinho.html')
-
-
-@app.route('/confimacaoPagamento')
-def confimacaoPagamento():
+@app.route('/confirmacaoPagamento')
+def confirmacaoPagamento():
     return render_template('confirmacaoPagamento.html')
 
 
@@ -105,6 +94,25 @@ def verProduto():
 
 # -----------LOGIN--------------
 
+# @app.route('/autenticar', methods=["POST", "GET"])
+# def autenticar():
+#     if request.method == "POST":
+#         email = request.form['email']
+#         senha = request.form['senha']
+#         banco = ligar_banco()
+#         cursor = banco.cursor()
+#         cursor.execute("SELECT * FROM usuario WHERE  email=%s AND senha=%s", ( email, senha))
+#         usuario = cursor.fetchone()
+#         cursor.close()
+#         banco.close()
+#
+#         if usuario:
+#             session['Usuario_Logado'] = email
+#             return redirect('/')
+#         else:
+#             return redirect('/login')
+#     return render_template('login.html')
+
 @app.route('/autenticar', methods=["POST", "GET"])
 def autenticar():
     if request.method == "POST":
@@ -112,16 +120,22 @@ def autenticar():
         senha = request.form['senha']
         banco = ligar_banco()
         cursor = banco.cursor()
-        cursor.execute("SELECT * FROM usuario WHERE email=%s AND senha=%s", (email, senha))
+        cursor.execute("SELECT id_usuario, nome FROM usuario WHERE email=%s AND senha=%s", (email, senha))
         usuario = cursor.fetchone()
+        cursor.close()
         banco.close()
 
         if usuario:
-            session['Usuario_Logado'] = email
+            session['Usuario_Logado'] = True
+            session['id_usuario'] = usuario[0]  # id_usuario
+            session['nome_usuario'] = usuario[1]  # nome do usuário
+            session['email'] = email
             return redirect('/')
         else:
             return redirect('/login')
+
     return render_template('login.html')
+
 
 
 @app.route('/deslogar')
@@ -129,6 +143,8 @@ def deslogar():
     session.clear()
     return redirect('/login')
 
+
+# -----------LOGIN--------------
 
 if __name__ == '__main__':
     app.run()

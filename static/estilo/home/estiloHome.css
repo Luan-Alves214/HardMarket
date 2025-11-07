@@ -25,6 +25,8 @@
 
 /*banner*/
 
+
+
 .h2-card {
     display: flex;
     justify-content: center;
@@ -37,6 +39,8 @@
     font-size: 60px;
     color: #000;
 }
+
+
 
 .card-produto {
     border: 1px solid #e0e0e0;
@@ -58,8 +62,8 @@
 }
 
 .card-img-top {
-    height: 300px;
-    object-fit: contain;
+    min-height: 300px;
+    object-fit: contain;!important;
     padding: 15px;
     background-color: #f8f9fa;
 }
@@ -232,17 +236,12 @@
 
 .card-img-top-promo {
     height: 320px;
-    object-fit: contain;
+    object-fit: contain!important;
     padding: 20px;
     background: linear-gradient(145deg, #0a0a0a, #1f1f1f);
 }
 
-.card-body {
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
+
 
 
 .card-title, .title-Promo {

@@ -49,67 +49,24 @@
     </div>
     <div class="container-fluid">
         <div class="row gaps">
-            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
-                <div class="card card-produto">
-                    <img src="{{ url_for('static', filename='img/produtos/Ssd.png') }}" class="card-img-top " alt="fotoSSD">
-                    <div class="card-body">
-                        <h5 class="card-title">SSD Kingston NV3, 1TB, M.2 NVMe</h5>
-                        <p class="card-text cinza">De: R$ 809,99 por:</p>
-                        <p class="card-text dinheiro"><strong>R$ 429,90</strong></p>
-                        <p class="card-text cinza">12x de R$ 42,15 sem juros.</p>
-                        <a href="/verProduto" class="card card-produto2">
-                            <button class="botao">Comprar</button>
-                        </a>
+            {% for produto in produtosNovos %}
+                <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
+                    <div class="card card-produto">
+                        <img src="{{ url_for('produto_bp.imagem', id=produto[0]) }}" class="card-img-top"
+                             alt="Imagem do Produto">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ produto[1] }}</h5>
+                            <p class="card-text cinza">De: R$ 809,99 por:</p>
+                            <p class="card-text dinheiro"><strong>R$ {{ produto[2] }}</strong></p>
+                            <p class="card-text cinza">12x de R$ 42,15 sem juros.</p>
+                            <a href="{{ url_for('produto_bp.verProduto', id_produto=produto[0]) }}"
+                               class="card card-produto">
+                                <button class="botao">Comprar</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-
-            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center ">
-                <div class="card card-produto">
-                    <img src="{{ url_for('static', filename='img/produtos/Processador.png') }}" class="card-img-top "
-                         alt="fotoProcessador">
-                    <div class="card-body">
-                        <h5 class="card-title">Processador AMD Ryzen 7 5700</h5>
-                        <p class="card-text cinza">De: R$ 1.659,99 por:</p>
-                        <p class="card-text dinheiro"><strong>R$ 834,90</strong></p>
-                        <p class="card-text cinza">12x de R$ 81,85 sem juros.</p>
-                        <a href="/verProduto" class="card card-produto2">
-                            <button class="botao">Comprar</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center ">
-                <div class="card card-produto">
-                    <img src="{{ url_for('static', filename='img/produtos/Placamae.png') }}"
-                         class="card-img-top " alt="fotoPlacamae">
-                    <div class="card-body">
-                        <h5 class="card-title">Placa Mãe Asus TUF Gaming A520M-PLUS II, Chipset A520</h5>
-                        <p class="card-text cinza">De: R$ 1.009,99 por:</p>
-                        <p class="card-text dinheiro"><strong>R$ 599,90</strong></p>
-                        <p class="card-text cinza">12x de R$ 58,81 sem juros.</p>
-                        <a href="/verProduto" class="card card-produto2">
-                            <button class="botao">Comprar</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center ">
-                <div class="card card-produto">
-                    <img src="{{ url_for('static', filename='img/produtos/Placadevideo.png') }}"
-                         class="card-img-top " alt="fotoPlacadeVideo">
-                    <div class="card-body">
-                        <h5 class="card-title">Placa de Vídeo Gigabyte AMD Radeon RX 9060 XT Gaming OC, 16GB, GDDR6</h5>
-                        <p class="card-text cinza">De: R$ 4.699,90 por:</p>
-                        <p class="card-text dinheiro"><strong>R$ 2.999,90</strong></p>
-                        <p class="card-text cinza">12x de R$ 294,11 sem juros.</p>
-                        <a href="/verProduto" class="card card-produto2">
-                            <button class="botao">Comprar</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -120,138 +77,52 @@
     </div>
     <div class="container-fluid">
         <div class="row gaps">
-            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
-                <div class="card card-produto">
-                    <img src="{{ url_for('static', filename='img/produtos/Ssd.png') }}" class="card-img-top " alt="fotoSSD">
-                    <div class="card-body">
-                        <h5 class="card-title">SSD Kingston NV3, 1TB, M.2 NVMe</h5>
-                        <p class="card-text cinza">De: R$ 809,99 por:</p>
-                        <p class="card-text dinheiro"><strong>R$ 429,90</strong></p>
-                        <p class="card-text cinza">12x de R$ 42,15 sem juros.</p>
-                        <a href="/verProduto" class="card card-produto2">
-                            <button class="botao">Comprar</button>
-                        </a>
+            {% for produto in produtosPromocoes %}
+                <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
+                    <div class="card card-produto">
+                        <img src="{{ url_for('produto_bp.imagem', id=produto[0]) }}" class="card-img-top"
+                             alt="Imagem do Produto">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ produto[1] }}</h5>
+                            <p class="card-text cinza">De: R$ 809,99 por:</p>
+                            <p class="card-text dinheiro"><strong>R$ {{ produto[2] }}</strong></p>
+                            <p class="card-text cinza">12x de R$ 42,15 sem juros.</p>
+                            <a href="{{ url_for('produto_bp.verProduto', id_produto=produto[0]) }}"
+                               class="card card-produto">
+                                <button class="botao">Comprar</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-
-            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center ">
-                <div class="card card-produto">
-                    <img src="{{ url_for('static', filename='img/produtos/Processador.png') }}" class="card-img-top "
-                         alt="fotoSSD">
-                    <div class="card-body">
-                        <h5 class="card-title">Processador AMD Ryzen 7 5700</h5>
-                        <p class="card-text cinza">De: R$ 1.659,99 por:</p>
-                        <p class="card-text dinheiro"><strong>R$ 834,90</strong></p>
-                        <p class="card-text cinza">12x de R$ 81,85 sem juros.</p>
-                        <a href="/verProduto" class="card card-produto2">
-                            <button class="botao">Comprar</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center ">
-                <div class="card card-produto">
-                    <img src="{{ url_for('static', filename='img/produtos/Placamae.png') }}"
-                         class="card-img-top " alt="fotoSSD">
-                    <div class="card-body">
-                        <h5 class="card-title">Placa Mãe Asus TUF Gaming A520M-PLUS II, Chipset A520</h5>
-                        <p class="card-text cinza">De: R$ 1.009,99 por:</p>
-                        <p class="card-text dinheiro"><strong>R$ 599,90</strong></p>
-                        <p class="card-text cinza">12x de R$ 58,81 sem juros.</p>
-                        <a href="/verProduto" class="card card-produto2">
-                            <button class="botao">Comprar</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center ">
-                <div class="card card-produto">
-                    <img src="{{ url_for('static', filename='img/produtos/Placadevideo.png') }}"
-                         class="card-img-top " alt="fotoSSD">
-                    <div class="card-body">
-                        <h5 class="card-title">Placa de Vídeo Gigabyte AMD Radeon RX 9060 XT Gaming OC, 16GB, GDDR6</h5>
-                        <p class="card-text cinza">De: R$ 4.699,90 por:</p>
-                        <p class="card-text dinheiro"><strong>R$ 2.999,90</strong></p>
-                        <p class="card-text cinza">12x de R$ 294,11 sem juros.</p>
-                        <a href="/verProduto" class="card card-produto2">
-                            <button class="botao">Comprar</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
 
 <section class="maisvendidos">
     <div class="h2-card">
-        <h2>PRODUTOS USADOS</h2>
+        <h2>PRODUTOS MAIS VENDIDOS</h2>
     </div>
     <div class="container-fluid">
         <div class="row gaps">
-            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
-                <div class="card card-produto">
-                    <img src="{{ url_for('static', filename='img/produtos/Ssd.png') }}" class="card-img-top " alt="fotoSSD">
-                    <div class="card-body">
-                        <h5 class="card-title">SSD Kingston NV3, 1TB, M.2 NVMe</h5>
-                        <p class="card-text cinza">De: R$ 809,99 por:</p>
-                        <p class="card-text dinheiro"><strong>R$ 429,90</strong></p>
-                        <p class="card-text cinza">12x de R$ 42,15 sem juros.</p>
-                        <a href="/verProduto" class="card card-produto2">
-                            <button class="botao">Comprar</button>
-                        </a>
+            {% for produto in produtosMaisVendidos %}
+                <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
+                    <div class="card card-produto">
+                        <img src="{{ url_for('produto_bp.imagem', id=produto[0]) }}" class="card-img-top"
+                             alt="Imagem do Produto">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ produto[1] }}</h5>
+                            <p class="card-text cinza">De: R$ 809,99 por:</p>
+                            <p class="card-text dinheiro"><strong>R$ {{ produto[2] }}</strong></p>
+                            <p class="card-text cinza">12x de R$ 42,15 sem juros.</p>
+                            <a href="{{ url_for('produto_bp.verProduto', id_produto=produto[0]) }}"
+                               class="card card-produto">
+                                <button class="botao">Comprar</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-
-            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center ">
-                <div class="card card-produto">
-                    <img src="{{ url_for('static', filename='img/produtos/Processador.png') }}" class="card-img-top "
-                         alt="fotoSSD">
-                    <div class="card-body">
-                        <h5 class="card-title">Processador AMD Ryzen 7 5700</h5>
-                        <p class="card-text cinza">De: R$ 1.659,99 por:</p>
-                        <p class="card-text dinheiro"><strong>R$ 834,90</strong></p>
-                        <p class="card-text cinza">12x de R$ 81,85 sem juros.</p>
-                        <a href="/verProduto" class="card card-produto2">
-                            <button class="botao">Comprar</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center ">
-                <div class="card card-produto">
-                    <img src="{{ url_for('static', filename='img/produtos/Placamae.png') }}"
-                         class="card-img-top " alt="fotoSSD">
-                    <div class="card-body">
-                        <h5 class="card-title">Placa Mãe Asus TUF Gaming A520M-PLUS II, Chipset A520</h5>
-                        <p class="card-text cinza">De: R$ 1.009,99 por:</p>
-                        <p class="card-text dinheiro"><strong>R$ 599,90</strong></p>
-                        <p class="card-text cinza">12x de R$ 58,81 sem juros.</p>
-                        <a href="/verProduto" class="card card-produto2">
-                            <button class="botao">Comprar</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center ">
-                <div class="card card-produto">
-                    <img src="{{ url_for('static', filename='img/produtos/Placadevideo.png') }}"
-                         class="card-img-top " alt="fotoSSD">
-                    <div class="card-body">
-                        <h5 class="card-title">Placa de Vídeo Gigabyte AMD Radeon RX 9060 XT Gaming OC, 16GB, GDDR6</h5>
-                        <p class="card-text cinza">De: R$ 4.699,90 por:</p>
-                        <p class="card-text dinheiro"><strong>R$ 2.999,90</strong></p>
-                        <p class="card-text cinza">12x de R$ 294,11 sem juros.</p>
-                        <a href="/verProduto" class="card card-produto2">
-                            <button class="botao">Comprar</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>

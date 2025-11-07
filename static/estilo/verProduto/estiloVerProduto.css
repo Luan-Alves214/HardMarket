@@ -152,43 +152,17 @@
     justify-content: space-between;
     text-align: center;
 }
-/* Estilos para o coração de favorito */
-.favorite-heart2 {
-    cursor: pointer;
-    margin-bottom: 12px;
-    z-index: 10;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
 
+.favorite-heart2 a {
+    text-decoration: none;
+    font-size: 24px;
+    transition: all 0.3s ease;
 }
 
-.favorite-heart2:hover {
-    background-color: rgb(255, 255, 255);
-    transform: scale(1.1);
+.favorite-heart2 a::before {
+    content: "🤍";
 }
 
-.heart-icon2 {
-    width: 22px;
-    height: 20px;
-    transition: all 0.2s;
-}
-
-/* Coração desativado (apenas borda) */
-.heart-icon2.empty {
-    fill: none;
-    stroke: #000;
-    stroke-width: 2;
-}
-
-/* Coração ativado (preenchido) */
-.heart-icon2.filled {
-    fill: #ff4757;
-    stroke: #000000;
-    stroke-width: 2;
+.favorite-heart2 a:hover::before {
+    content: "❤️";
 }

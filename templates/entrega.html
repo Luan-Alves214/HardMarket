@@ -46,8 +46,13 @@
                     <span class="option-price">Grátis</span>
                 </div>
                 <div class="option-address">
-                    <p>Seu endereço: Rua Exemplo, 123 - Centro, São Paulo - SP</p>
-                    <p class="change-address">Alterar endereço</p>
+                    <p>
+                        Seu endereço:
+                        {{ usuario.rua }} -
+                        {{ usuario.bairro }} -
+                        {{ usuario.cidade }} - {{ usuario.estado }}
+                    </p>
+                    <a href="/editarUsuario" class="change-address">Alterar endereço</a>
                 </div>
             </div>
 

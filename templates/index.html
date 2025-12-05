@@ -47,8 +47,12 @@
                      alt="banner2">
             </div>
             <div class="carousel-item">
-                <img src="{{ url_for('static', filename='img/banner/banner2.png') }}" class="d-block w-100 banner-img"
+                <img src="{{ url_for('static', filename='img/banner/banner3.png') }}" class="d-block w-100 banner-img"
                      alt="banner3">
+            </div>
+            <div class="carousel-item">
+                <img src="{{ url_for('static', filename='img/banner/banner4.png') }}" class="d-block w-100 banner-img"
+                     alt="banner4">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -76,9 +80,13 @@
                              alt="Imagem do Produto">
                         <div class="card-body">
                             <h5 class="card-title">{{ produto[1] }}</h5>
-                            <p class="card-text cinza">De: R$ 809,99 por:</p>
+                            {#                            <p class="card-text cinza">De: R$ 809,99 por:</p>#}
                             <p class="card-text dinheiro"><strong>R$ {{ produto[2] }}</strong></p>
-                            <p class="card-text cinza">12x de R$ 42,15 sem juros.</p>
+                            {#                            <p class="card-text cinza">12x de R$ 42,15 sem juros.</p>#}
+                            {% set parcela = (produto[2] / 12) %}
+                            <p class="card-text cinza">
+                                12x de R$ {{ "%.2f"|format(parcela)|replace(".", ",") }} sem juros.
+                            </p>
                             <a href="{{ url_for('produto_bp.verProduto', id_produto=produto[0]) }}"
                                class="card card-produto">
                                 <button class="botao">Comprar</button>
@@ -108,9 +116,13 @@
                                  alt="Imagem do Produto">
                             <div class="card-body">
                                 <h5 class="card-title" style="color: white">{{ produto[1] }}</h5>
-                                <p class="card-text cinza">De: R$ 1.659,99 por:</p>
+                                {#                                <p class="card-text cinza">De: R$ 1.659,99 por:</p>#}
                                 <p class="card-text dinheiro"><strong>R$ {{ produto[2] }}</strong></p>
-                                <p class="card-text cinza">12x de R$ 81,85 sem juros.</p>
+                                {#                                <p class="card-text cinza">12x de R$ 81,85 sem juros.</p>#}
+                                {% set parcela = (produto[2] / 12) %}
+                                <p class="card-text cinza">
+                                    12x de R$ {{ "%.2f"|format(parcela)|replace(".", ",") }} sem juros.
+                                </p>
                                 <a href="{{ url_for('produto_bp.verProduto', id_produto=produto[0]) }}"
                                    class="card card-produto">
                                     <button class="botao">Comprar</button>
@@ -138,9 +150,13 @@
                              alt="Imagem do Produto">
                         <div class="card-body">
                             <h5 class="card-title">{{ produto[1] }}</h5>
-                            <p class="card-text cinza">De: R$ 809,99 por:</p>
+                            {#                            <p class="card-text cinza">De: R$ 809,99 por:</p>#}
                             <p class="card-text dinheiro"><strong>R$ {{ produto[2] }}</strong></p>
-                            <p class="card-text cinza">12x de R$ 42,15 sem juros.</p>
+                            {#                            <p class="card-text cinza">12x de R$ 42,15 sem juros.</p>#}
+                            {% set parcela = (produto[2] / 12) %}
+                            <p class="card-text cinza">
+                                12x de R$ {{ "%.2f"|format(parcela)|replace(".", ",") }} sem juros.
+                            </p>
                             <a href="{{ url_for('produto_bp.verProduto', id_produto=produto[0]) }}"
                                class="card card-produto">
                                 <button class="botao">Comprar</button>
@@ -172,15 +188,18 @@
                         <h3>CONTATO</h3>
                         <hr class="hr-titulo">
                     </div>
-                    <form action="#" method="post" class="form-contato">
-                        <div class="nome-telefone-footer ">
+                    <form action="https://formsubmit.co/lh.alves214@gmail.com" method="POST" class="form-contato">
+                        <input type="hidden" name="_next" value="https://seusite.com/obrigado">
+                        <input type="hidden" name="_captcha" value="false">
+
+                        <div class="nome-telefone-footer">
                             <input type="text" name="nome" placeholder="Nome" required>
                             <input type="tel" name="telefone" placeholder="Telefone" required>
                         </div>
-                        <div class="email-footer ">
+                        <div class="email-footer">
                             <input type="email" name="email" placeholder="Email" required>
                         </div>
-                        <div class="mensagem-footer ">
+                        <div class="mensagem-footer">
                             <textarea name="mensagem" placeholder="Mensagem" rows="5" required></textarea>
                         </div>
                         <button type="submit">Fale Conosco</button>

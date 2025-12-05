@@ -42,5 +42,3 @@ def cadastrarUsuario():
     return redirect('/login')
 
 
-# @app.route('/login')
-# def login():

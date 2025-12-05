@@ -228,3 +228,11 @@
         padding: 0 10px;
     }
 }
+
+
+.botaoBuscar{
+    background-color: black;
+    border-radius: 10px;
+    padding: 7px 12px 7px 12px;
+    color: white;
+}

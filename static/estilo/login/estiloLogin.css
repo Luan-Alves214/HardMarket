@@ -87,3 +87,17 @@ hr {
     background-color: #cccccc;
 }
 
+.alertErro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #ffdddd;
+    color: #b00000;
+    padding: 15px;
+    border-radius: 6px;
+    margin: 0 auto 15px auto; /* centraliza */
+    font-weight: bold;
+    width: fit-content; /* opcional */
+    max-width: 400px; /* opcional */
+}

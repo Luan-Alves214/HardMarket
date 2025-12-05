@@ -1,241 +1,241 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>HardMarket - Pagamento</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='estilo/pagamento/estiloPagamento.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='estilo/entrega/estiloEntrega.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='estilo/footer.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='estilo/header/header.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/png">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>HardMarket - Pagamento</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='estilo/pagamento/estiloPagamento.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='estilo/entrega/estiloEntrega.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='estilo/footer.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='estilo/header/header.css') }}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/png">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-</head>
-<body>
-<header class="header">
-    <div class="logo">
-        <a href="/">HardMarket</a>
-    </div>
-    <nav class="menu">
-        <ul>
-            <li><a href="/produtos">Produtos</a></li>
-            <li><a href="/favoritos">Favoritos</a></li>
-            <li><a href="/vender" class="btn-vender">Vender</a></li>
-        </ul>
-    </nav>
-    <div class="menu-pesquisa">
-        <p></p>
-    </div>
-    <nav class="menu-icons">
-        <ul>
-            <li><a href="/carrinho"><img src="{{ url_for('static', filename='img/carrinho.png') }}" alt="Carrinho"></a>
-            </li>
-            <li><a href="/login"><img src="{{ url_for('static', filename='img/login.png') }}" alt="Login"></a></li>
-        </ul>
-    </nav>
-</header>
+    </head>
+    <body>
+    <header class="header">
+        <div class="logo">
+            <a href="/">HardMarket</a>
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="/produtos">Produtos</a></li>
+                <li><a href="/favoritos">Favoritos</a></li>
+                <li><a href="/vender" class="btn-vender">Vender</a></li>
+            </ul>
+        </nav>
+        <div class="menu-pesquisa">
+            <p></p>
+        </div>
+        <nav class="menu-icons">
+            <ul>
+                <li><a href="/carrinho"><img src="{{ url_for('static', filename='img/carrinho.png') }}" alt="Carrinho"></a>
+                </li>
+                <li><a href="/login"><img src="{{ url_for('static', filename='img/login.png') }}" alt="Login"></a></li>
+            </ul>
+        </nav>
+    </header>
 
-<div class="container">
-    <div class="payment-container">
-        <section class="payment-section">
-            <h2 class="section-title">Métodos de Pagamento</h2>
+    <div class="container">
+        <div class="payment-container">
+            <section class="payment-section">
+                <h2 class="section-title">Métodos de Pagamento</h2>
 
-            <div class="payment-options">
-                <!-- Opção 1: Pix -->
-                <div class="payment-option selected" id="pix-option">
-                    <div class="option-header">
-                        <div>
-                            <span class="option-title">Pix</span>
+                <div class="payment-options">
+                    <!-- Opção 1: Pix -->
+                    <div class="payment-option selected" id="pix-option">
+                        <div class="option-header">
+                            <div>
+                                <span class="option-title">Pix</span>
+                            </div>
                         </div>
+
                     </div>
 
-                </div>
-
-                <!-- Opção 2: Cartão de crédito -->
-                <div class="payment-option" id="credit-card-option">
-                    <div class="option-header">
-                        <div>
-                            <span class="option-title">Cartão de Crédito</span>
+                    <!-- Opção 2: Cartão de crédito -->
+                    <div class="payment-option" id="credit-card-option">
+                        <div class="option-header">
+                            <div>
+                                <span class="option-title">Cartão de Crédito</span>
+                            </div>
                         </div>
+
+                        <!--                    &lt;!&ndash;MP&ndash;&gt;-->
+                        <!--                    <div>-->
+                        <!--                        <form id="form-checkout" action="/process_payment" method="POST">-->
+                        <!--                            <div id="form-checkout__cardNumber" class="containerMP"></div>-->
+                        <!--                            <div id="form-checkout__expirationDate" class="containerMP"></div>-->
+                        <!--                            <div id="form-checkout__securityCode" class="containerMP"></div>-->
+                        <!--                            <input type="text" id="form-checkout__cardholderName" placeholder="Titular do cartão"/>-->
+                        <!--                            <select id="form-checkout__issuer" name="issuer">-->
+                        <!--                                <option value="" disabled selected>Banco emissor</option>-->
+                        <!--                            </select>-->
+                        <!--                            <select id="form-checkout__installments" name="installments">-->
+                        <!--                                <option value="" disabled selected>Parcelas</option>-->
+                        <!--                            </select>-->
+                        <!--                            <select id="form-checkout__identificationType" name="identificationType">-->
+                        <!--                                <option value="" disabled selected>Tipo de documento</option>-->
+                        <!--                            </select>-->
+                        <!--                            <input type="text" id="form-checkout__identificationNumber" name="identificationNumber"-->
+                        <!--                                   placeholder="Número do documento"/>-->
+                        <!--                            <input type="email" id="form-checkout__email" name="email" placeholder="E-mail"/>-->
+
+                        <!--                            <input id="token" name="token" type="hidden">-->
+                        <!--                            <input id="paymentMethodId" name="paymentMethodId" type="hidden">-->
+                        <!--                            <input id="transactionAmount" name="transactionAmount" type="hidden" value="100">-->
+                        <!--                            <input id="description" name="description" type="hidden" value="Nome do Produto">-->
+
+                        <!--                            <button type="submit" id="form-checkout__submit">Pagar</button>-->
+                        <!--                        </form>-->
+                        <!--                    </div>-->
+                        <!--                    &lt;!&ndash;MP&ndash;&gt;-->
+
+                        <!-- Formulário do cartão (aparece quando selecionado) -->
+                        <!--                    <div class="card-form" id="card-form" style="display: none;">-->
+                        <!--                        <h3>Novo cartão de crédito</h3>-->
+                        <!--                        <div class="form-group">-->
+                        <!--                            <label for="card-number">Número do cartão</label>-->
+                        <!--                            <input type="text" id="card-number" placeholder="0000 0000 0000 0000">-->
+                        <!--                        </div>-->
+                        <!--                        <div class="form-group">-->
+                        <!--                            <label for="card-name">Nome no cartão</label>-->
+                        <!--                            <input type="text" id="card-name" placeholder="Como está no cartão">-->
+                        <!--                        </div>-->
+                        <!--                        <div class="card-details">-->
+                        <!--                            <div class="form-group">-->
+                        <!--                                <label for="card-expiry">Validade</label>-->
+                        <!--                                <input type="text" id="card-expiry" placeholder="MM/AA">-->
+                        <!--                            </div>-->
+                        <!--                            <div class="form-group">-->
+                        <!--                                <label for="card-cvv">CVV</label>-->
+                        <!--                                <input type="text" id="card-cvv" placeholder="000">-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                        <!--                    </div>-->
                     </div>
 
-                    <!--                    &lt;!&ndash;MP&ndash;&gt;-->
-                    <!--                    <div>-->
-                    <!--                        <form id="form-checkout" action="/process_payment" method="POST">-->
-                    <!--                            <div id="form-checkout__cardNumber" class="containerMP"></div>-->
-                    <!--                            <div id="form-checkout__expirationDate" class="containerMP"></div>-->
-                    <!--                            <div id="form-checkout__securityCode" class="containerMP"></div>-->
-                    <!--                            <input type="text" id="form-checkout__cardholderName" placeholder="Titular do cartão"/>-->
-                    <!--                            <select id="form-checkout__issuer" name="issuer">-->
-                    <!--                                <option value="" disabled selected>Banco emissor</option>-->
-                    <!--                            </select>-->
-                    <!--                            <select id="form-checkout__installments" name="installments">-->
-                    <!--                                <option value="" disabled selected>Parcelas</option>-->
-                    <!--                            </select>-->
-                    <!--                            <select id="form-checkout__identificationType" name="identificationType">-->
-                    <!--                                <option value="" disabled selected>Tipo de documento</option>-->
-                    <!--                            </select>-->
-                    <!--                            <input type="text" id="form-checkout__identificationNumber" name="identificationNumber"-->
-                    <!--                                   placeholder="Número do documento"/>-->
-                    <!--                            <input type="email" id="form-checkout__email" name="email" placeholder="E-mail"/>-->
-
-                    <!--                            <input id="token" name="token" type="hidden">-->
-                    <!--                            <input id="paymentMethodId" name="paymentMethodId" type="hidden">-->
-                    <!--                            <input id="transactionAmount" name="transactionAmount" type="hidden" value="100">-->
-                    <!--                            <input id="description" name="description" type="hidden" value="Nome do Produto">-->
-
-                    <!--                            <button type="submit" id="form-checkout__submit">Pagar</button>-->
-                    <!--                        </form>-->
-                    <!--                    </div>-->
-                    <!--                    &lt;!&ndash;MP&ndash;&gt;-->
-
-                    <!-- Formulário do cartão (aparece quando selecionado) -->
-                    <!--                    <div class="card-form" id="card-form" style="display: none;">-->
-                    <!--                        <h3>Novo cartão de crédito</h3>-->
-                    <!--                        <div class="form-group">-->
-                    <!--                            <label for="card-number">Número do cartão</label>-->
-                    <!--                            <input type="text" id="card-number" placeholder="0000 0000 0000 0000">-->
-                    <!--                        </div>-->
-                    <!--                        <div class="form-group">-->
-                    <!--                            <label for="card-name">Nome no cartão</label>-->
-                    <!--                            <input type="text" id="card-name" placeholder="Como está no cartão">-->
-                    <!--                        </div>-->
-                    <!--                        <div class="card-details">-->
-                    <!--                            <div class="form-group">-->
-                    <!--                                <label for="card-expiry">Validade</label>-->
-                    <!--                                <input type="text" id="card-expiry" placeholder="MM/AA">-->
-                    <!--                            </div>-->
-                    <!--                            <div class="form-group">-->
-                    <!--                                <label for="card-cvv">CVV</label>-->
-                    <!--                                <input type="text" id="card-cvv" placeholder="000">-->
-                    <!--                            </div>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
-                </div>
-
-                <!-- Opção 3: Boleto bancário -->
-                <div class="payment-option" id="boleto-option">
-                    <div class="option-header">
-                        <div>
-                            <span class="option-title">Boleto Bancário</span>
+                    <!-- Opção 3: Boleto bancário -->
+                    <div class="payment-option" id="boleto-option">
+                        <div class="option-header">
+                            <div>
+                                <span class="option-title">Boleto Bancário</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="btn-continuar">
-                <a href="/confirmacaoPagamento" class="continue-btn">Continuar</a>
-            </div>
-        </section>
+                <div class="btn-continuar">
+                    <a href="/confirmacaoPagamento" class="continue-btn">Continuar</a>
+                </div>
+            </section>
 
-        <section class="summary-section">
-            <h2 class="section-title">Resumo da Compra</h2>
+            <section class="summary-section">
+                <h2 class="section-title">Resumo da Compra</h2>
 
-            <div class="summary-item">
-                <span class="summary-label">Produtos ({{ total_itens }})</span>
-                <span class="summary-value">R$ {{ "%.2f"|format(total_valor) }}</span>
-            </div>
+                <div class="summary-item">
+                    <span class="summary-label">Produtos ({{ total_itens }})</span>
+                    <span class="summary-value">R$ {{ "%.2f"|format(total_valor) }}</span>
+                </div>
 
-            <div class="summary-item">
-                <span class="summary-label">Frete</span>
-                <span class="summary-value">Grátis</span>
-            </div>
+                <div class="summary-item">
+                    <span class="summary-label">Frete</span>
+                    <span class="summary-value">Grátis</span>
+                </div>
 
-            <div class="summary-item total">
-                <span>Total</span>
-                <span>R$ {{ "%.2f"|format(total_valor) }}</span>
-            </div>
-        </section>
+                <div class="summary-item total">
+                    <span>Total</span>
+                    <span>R$ {{ "%.2f"|format(total_valor) }}</span>
+                </div>
+            </section>
+        </div>
     </div>
-</div>
 
-<footer>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center  card-qrcode-text">
-                <div class="card card-qrcode">
-                    <a href="https://wa.me/5518998196826?text=Ol%C3%A1%2C%20tenho%20duvidas%20sobre%20o%20site%20HardMarket%2C%20voc%C3%AA%20pode%20me%20ajudar%3F"
-                       target="_blank"><img src="{{ url_for('static', filename='img/qrcode.png') }}" class="img-qrcode"
-                                            alt="Qrcode"></a>
+    <footer>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center  card-qrcode-text">
+                    <div class="card card-qrcode">
+                        <a href="https://wa.me/5518998196826?text=Ol%C3%A1%2C%20tenho%20duvidas%20sobre%20o%20site%20HardMarket%2C%20voc%C3%AA%20pode%20me%20ajudar%3F"
+                           target="_blank"><img src="{{ url_for('static', filename='img/qrcode.png') }}" class="img-qrcode"
+                                                alt="Qrcode"></a>
+                    </div>
+                    <div>
+                        <p class="text-qrcode">Conectando você às melhores peças de hardware com segurança e confiança</p>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center ">
+                    <div class="card card-footer">
+                        <div class="titulo-contado">
+                            <h3>CONTATO</h3>
+                            <hr class="hr-titulo">
+                        </div>
+                        <form action="#" method="post" class="form-contato">
+                            <div class="nome-telefone-footer ">
+                                <input type="text" name="nome" placeholder="Nome" required>
+                                <input type="tel" name="telefone" placeholder="Telefone" required>
+                            </div>
+                            <div class="email-footer ">
+                                <input type="email" name="email" placeholder="Email" required>
+                            </div>
+                            <div class="mensagem-footer ">
+                                <textarea name="mensagem" placeholder="Mensagem" rows="5" required></textarea>
+                            </div>
+                            <button type="submit">Fale Conosco</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footerp2">
+            <div class="logo-redesSociais">
+                <h2 class="titulo-footer">HardMarket</h2>
+                <ul class="redesSociais">
+                    <li>
+                        <img src="{{ url_for('static', filename='img/redesSociais/facebook.png') }}" alt="facebook">
+                    </li>
+                    <li>
+                        <img src="{{ url_for('static', filename='img/redesSociais/instagram.png') }}" alt="instagram">
+                    </li>
+                    <li>
+                        <img src="{{ url_for('static', filename='img/redesSociais/whatsapp.png') }}" alt="whatsapp">
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <div class="ofertas-input">
+                    <label>Receba ofertas exclusivas:</label>
+                    <input type="text" name="text" placeholder="" required>
+                    <button type="submit" class="botaoIncrever">Inscrever-se</button>
+                </div>
+            </div>
+            <div class="sobre-nos">
+                <a href="/sobre" class="botao-sobreNosA"><h3 class="botao-sobreNos">Ver sobre nós</h3></a>
+            </div>
+
+            <div class="todos-direitos">
+                <div>
+                    <p>HardMarket | CNPJ: 00.000.000/0001-00 | Penápolis/SP</p>
                 </div>
                 <div>
-                    <p class="text-qrcode">Conectando você às melhores peças de hardware com segurança e confiança</p>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center ">
-                <div class="card card-footer">
-                    <div class="titulo-contado">
-                        <h3>CONTATO</h3>
-                        <hr class="hr-titulo">
-                    </div>
-                    <form action="#" method="post" class="form-contato">
-                        <div class="nome-telefone-footer ">
-                            <input type="text" name="nome" placeholder="Nome" required>
-                            <input type="tel" name="telefone" placeholder="Telefone" required>
-                        </div>
-                        <div class="email-footer ">
-                            <input type="email" name="email" placeholder="Email" required>
-                        </div>
-                        <div class="mensagem-footer ">
-                            <textarea name="mensagem" placeholder="Mensagem" rows="5" required></textarea>
-                        </div>
-                        <button type="submit">Fale Conosco</button>
-                    </form>
+                    <p>© 2025 HardMarket. Todos os direitos reservados.</p>
+                    <p>Desenvolvido por Luan Alves</p>
                 </div>
             </div>
         </div>
-    </div>
+    </footer>
 
-    <div class="footerp2">
-        <div class="logo-redesSociais">
-            <h2 class="titulo-footer">HardMarket</h2>
-            <ul class="redesSociais">
-                <li>
-                    <img src="{{ url_for('static', filename='img/redesSociais/facebook.png') }}" alt="facebook">
-                </li>
-                <li>
-                    <img src="{{ url_for('static', filename='img/redesSociais/instagram.png') }}" alt="instagram">
-                </li>
-                <li>
-                    <img src="{{ url_for('static', filename='img/redesSociais/whatsapp.png') }}" alt="whatsapp">
-                </li>
-            </ul>
-        </div>
-        <div>
-            <div class="ofertas-input">
-                <label>Receba ofertas exclusivas:</label>
-                <input type="text" name="text" placeholder="" required>
-                <button type="submit" class="botaoIncrever">Inscrever-se</button>
-            </div>
-        </div>
-        <div class="sobre-nos">
-            <a href="/sobre" class="botao-sobreNosA"><h3 class="botao-sobreNos">Ver sobre nós</h3></a>
-        </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 
-        <div class="todos-direitos">
-            <div>
-                <p>HardMarket | CNPJ: 00.000.000/0001-00 | Penápolis/SP</p>
-            </div>
-            <div>
-                <p>© 2025 HardMarket. Todos os direitos reservados.</p>
-                <p>Desenvolvido por Luan Alves</p>
-            </div>
-        </div>
-    </div>
-</footer>
+    <script src="{{ url_for('static', filename='estilo/header/scriptHeader.js') }}"></script>
+    <script src="{{ url_for('static', filename='estilo/pagamento/scriptPagamento.js') }}"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    {#<script src="https://sdk.mercadopago.com/js/v2"></script>#}
+    {#<script>#}
+    {#    const mp = new MercadoPago("YOUR_PUBLIC_KEY");#}
+    {#</script>#}
 
-<script src="{{ url_for('static', filename='estilo/header/scriptHeader.js') }}"></script>
-<script src="{{ url_for('static', filename='estilo/pagamento/scriptPagamento.js') }}"></script>
-
-{#<script src="https://sdk.mercadopago.com/js/v2"></script>#}
-{#<script>#}
-{#    const mp = new MercadoPago("YOUR_PUBLIC_KEY");#}
-{#</script>#}
-
-</body>
-</html>
+    </body>
+    </html>

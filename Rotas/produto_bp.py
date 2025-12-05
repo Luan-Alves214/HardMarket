@@ -105,7 +105,7 @@ def editarProduto(id):
         banco.close()
         return redirect('/meusProdutos')
 
-    #atualizar as informações
+    # atualizar as informações
     if request.method == 'POST':
         nome = request.form['nome']
         marca = request.form['marca']
@@ -116,7 +116,6 @@ def editarProduto(id):
         descricao = request.form['descricao']
         imagem = request.files['imagem-produto']
         imagem_blob = imagem.read()
-
 
         cursor.execute("""
                        UPDATE produto
@@ -129,7 +128,7 @@ def editarProduto(id):
                            descricao=%s,
                            imagem=%s
                        WHERE id_produto = %s
-                       """, (nome, marca, preco, modelo, categoria, estoque, descricao,imagem_blob,id))
+                       """, (nome, marca, preco, modelo, categoria, estoque, descricao, imagem_blob, id))
         banco.commit()
         cursor.close()
         banco.close()
@@ -194,12 +193,16 @@ def produtos():
 
     cursor.execute("SELECT id_produto, nome, preco, imagem FROM produto ORDER BY RANDOM()")
     produtosNovos = cursor.fetchall()
+
+    cursor.execute("SELECT DISTINCT categoria FROM produto")
+    categorias = [c[0] for c in cursor.fetchall()]
     cursor.close()
     banco.close()
     return render_template('produtos.html',
                            produtosMaisVendidos=produtosMaisVendidos,
                            produtosPromocoes=produtosPromocoes,
-                           produtosNovos=produtosNovos)
+                           produtosNovos=produtosNovos,
+                           categorias=categorias)
 
 
 # --------------PRODUTOS ----------------
@@ -287,6 +290,7 @@ def carrinho():
         total_valor=total_valor
     )
 
+
 @bp.route('/remover_item/<int:id_produto>')
 def remover_item(id_produto):
     if 'Usuario_Logado' not in session:
@@ -334,6 +338,7 @@ def diminuir_quantidade(id_produto):
         session.modified = True
     return redirect('/carrinho')
 
+
 # --------------CARRINHO----------------
 
 # --------------PAGAMENTO----------------
@@ -341,9 +346,10 @@ def diminuir_quantidade(id_produto):
 def pagamento():
     if 'Usuario_Logado' not in session:
         return redirect('/login')
-    carrinho = session.get('carrinho', [])
 
-    # Evita erro se o carrinho estiver vazio
+    user_cart_key = f"carrinho_{session['id_usuario']}"
+    carrinho = session.get(user_cart_key, [])
+
     total_itens = sum(item['quantidade'] for item in carrinho) if carrinho else 0
     total_valor = sum(item['preco'] * item['quantidade'] for item in carrinho) if carrinho else 0
 
@@ -363,16 +369,57 @@ def pagamento():
 def entrega():
     if 'Usuario_Logado' not in session:
         return redirect('/login')
-    carrinho = session.get('carrinho', [])
+
+    user_cart_key = f"carrinho_{session['id_usuario']}"
+    carrinho = session.get(user_cart_key, [])
 
     total_itens = sum(item['quantidade'] for item in carrinho) if carrinho else 0
     total_valor = sum(item['preco'] * item['quantidade'] for item in carrinho) if carrinho else 0
+    id_usuario = session['id_usuario']
+
+    banco = ligar_banco()
+    cursor = banco.cursor()
+
+    cursor.execute("""
+                   SELECT nome,
+                          email,
+                          telefone,
+                          data_nascimento,
+                          cep,
+                          rua,
+                          bairro,
+                          cidade,
+                          estado
+                   FROM usuario
+                   WHERE id_usuario = %s
+                   """, (id_usuario,))
+
+    usuario_bd = cursor.fetchone()
+
+    cursor.close()
+    banco.close()
+
+    if not usuario_bd:
+        usuario = None
+    else:
+        usuario = {
+            'nome': usuario_bd[0],
+            'email': usuario_bd[1],
+            'telefone': usuario_bd[2],
+            'data_nascimento': usuario_bd[3],
+            'cep': usuario_bd[4],
+            'rua': usuario_bd[5],
+            'bairro': usuario_bd[6],
+            'cidade': usuario_bd[7],
+            'estado': usuario_bd[8],
+        }
 
     return render_template(
         'entrega.html',
         carrinho=carrinho,
         total_itens=total_itens,
-        total_valor=total_valor
+        total_valor=total_valor,
+        usuario=usuario
     )
 
 
@@ -384,11 +431,16 @@ def entrega():
 def confirmacao_pagamento():
     if 'Usuario_Logado' not in session:
         return redirect('/login')
-    carrinho = session.get('carrinho', [])
+
+    user_cart_key = f"carrinho_{session['id_usuario']}"
+    carrinho = session.get(user_cart_key, [])
+
     total_itens = sum(item['quantidade'] for item in carrinho) if carrinho else 0
     total_valor = sum(item['preco'] * item['quantidade'] for item in carrinho) if carrinho else 0
 
-    session['carrinho'] = []
+    # Zera o carrinho do usuário logado
+    session[user_cart_key] = []
+    session.modified = True
 
     return render_template(
         'confirmacaoPagamento.html',
@@ -477,4 +529,191 @@ def remover_favorito(id_produto):
     banco.close()
     return redirect('/favoritos')
 
+
 # --------------FAVORITOS----------------
+
+# --------------BUSCA----------------
+@bp.route('/buscarProdutos')
+def buscarProdutos():
+    pesquisa = request.args.get('pesquisa', '')
+    termo = request.args.get('termo', '')
+    preco = request.args.get('preco', '')
+
+    banco = ligar_banco()
+    cursor = banco.cursor()
+
+    # Buscar categorias (para o select aparecer)
+    cursor.execute("SELECT DISTINCT categoria FROM produto")
+    categorias = [c[0] for c in cursor.fetchall()]
+
+    # Montar SQL DINÂMICO
+    query = "SELECT id_produto, nome, preco, imagem FROM produto WHERE 1=1"
+    params = []
+
+    # Filtro por texto
+    if pesquisa:
+        query += " AND nome ILIKE %s"
+        params.append(f"%{pesquisa}%")
+
+    # Filtro por categoria
+    if termo:
+        query += " AND categoria = %s"
+        params.append(termo)
+
+    # Filtro por preço
+    if preco:
+        query += " AND preco <= %s"
+        params.append(preco)
+
+    cursor.execute(query, params)
+    produtosNovos = cursor.fetchall()
+
+    # Para não quebrar a página
+    produtosPromocoes = []
+    produtosMaisVendidos = []
+
+    cursor.close()
+    banco.close()
+
+    return render_template(
+        'produtos.html',
+        produtosNovos=produtosNovos,
+        produtosPromocoes=produtosPromocoes,
+        produtosMaisVendidos=produtosMaisVendidos,
+        pesquisa=pesquisa,
+        termo=termo,
+        preco=preco,
+        categorias=categorias
+    )
+
+
+# --------------BUSCA----------------
+
+
+# --------------MINHA CONTA----------------
+@bp.route('/usuarioLogado')
+def usuarioLogado():
+    if 'Usuario_Logado' not in session:
+        return redirect('/login')
+
+    id_usuario = session['id_usuario']
+    banco = ligar_banco()
+    cursor = banco.cursor()
+    cursor.execute("""
+                   SELECT nome,
+                          email,
+                          telefone,
+                          data_nascimento,
+                          cep,
+                          rua,
+                          bairro,
+                          cidade,
+                          estado
+                   FROM usuario
+                   WHERE id_usuario = %s
+                   """, (id_usuario,))
+    usuario_bd = cursor.fetchone()
+    cursor.close()
+    banco.close()
+
+    if not usuario_bd:
+        return redirect('/login')
+
+    # Monta dicionário com os dados do usuário
+    usuario = {
+        'nome': usuario_bd[0],
+        'email': usuario_bd[1],
+        'telefone': usuario_bd[2],
+        'data_nascimento': usuario_bd[3],
+        'cep': usuario_bd[4],
+        'rua': usuario_bd[5],
+        'bairro': usuario_bd[6],
+        'cidade': usuario_bd[7],
+        'estado': usuario_bd[8],
+        'iniciais': ''.join([x[0] for x in usuario_bd[0].split()[:2]]).upper()
+    }
+
+    # Passa para o template
+    return render_template('usuarioLogado.html', usuario=usuario)
+
+
+@bp.route('/editarUsuario', methods=['GET', 'POST'])
+def editarUsuario():
+    if 'Usuario_Logado' not in session:
+        return redirect('/login')
+
+    id_usuario = session['id_usuario']
+    banco = ligar_banco()
+    cursor = banco.cursor()
+
+    if request.method == 'POST':
+        nome = request.form['nome']
+        email = request.form['email']
+        telefone = request.form['telefone']
+        data_nascimento = request.form['data_nascimento']
+        cep = request.form['cep']
+        rua = request.form['rua']
+        bairro = request.form['bairro']
+        cidade = request.form['cidade']
+        estado = request.form['estado']
+
+        cursor.execute("""
+                       UPDATE usuario
+                       SET nome=%s,
+                           email=%s,
+                           telefone=%s,
+                           data_nascimento=%s,
+                           cep=%s,
+                           rua=%s,
+                           bairro=%s,
+                           cidade=%s,
+                           estado=%s
+                       WHERE id_usuario = %s
+                       """, (nome, email, telefone, data_nascimento, cep, rua, bairro, cidade, estado, id_usuario))
+        banco.commit()
+        cursor.close()
+        banco.close()
+
+        # Atualiza o session['Usuario_Logado'] se tiver algum dado usado na sessão
+        session['Usuario_Logado'] = nome
+
+        return redirect('/usuarioLogado')
+
+    # GET: carregar dados
+    cursor.execute("""
+                   SELECT nome,
+                          email,
+                          telefone,
+                          data_nascimento,
+                          cep,
+                          rua,
+                          bairro,
+                          cidade,
+                          estado
+                   FROM usuario
+                   WHERE id_usuario = %s
+                   """, (id_usuario,))
+    usuario_bd = cursor.fetchone()
+    cursor.close()
+    banco.close()
+
+    if not usuario_bd:
+        return redirect('/login')
+
+    usuario = {
+        'nome': usuario_bd[0],
+        'email': usuario_bd[1],
+        'telefone': usuario_bd[2],
+        'data_nascimento': usuario_bd[3],
+        'cep': usuario_bd[4],
+        'rua': usuario_bd[5],
+        'bairro': usuario_bd[6],
+        'cidade': usuario_bd[7],
+        'estado': usuario_bd[8]
+    }
+
+    return render_template('editarUsuario.html', usuario=usuario)
+# --------------MINHA CONTA----------------
+
+
+

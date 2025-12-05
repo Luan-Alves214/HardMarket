@@ -60,6 +60,9 @@ def favoritos():
 
 @app.route('/login')
 def login():
+    # Se o usuário já estiver logado, redireciona direto
+    if 'Usuario_Logado' in session:
+        return redirect('/usuarioLogado')
     return render_template('login.html')
 
 
@@ -94,48 +97,28 @@ def verProduto():
 
 # -----------LOGIN--------------
 
-# @app.route('/autenticar', methods=["POST", "GET"])
-# def autenticar():
-#     if request.method == "POST":
-#         email = request.form['email']
-#         senha = request.form['senha']
-#         banco = ligar_banco()
-#         cursor = banco.cursor()
-#         cursor.execute("SELECT * FROM usuario WHERE  email=%s AND senha=%s", ( email, senha))
-#         usuario = cursor.fetchone()
-#         cursor.close()
-#         banco.close()
-#
-#         if usuario:
-#             session['Usuario_Logado'] = email
-#             return redirect('/')
-#         else:
-#             return redirect('/login')
-#     return render_template('login.html')
-
-@app.route('/autenticar', methods=["POST", "GET"])
+@app.route('/autenticar', methods=["POST"])
 def autenticar():
-    if request.method == "POST":
-        email = request.form['email']
-        senha = request.form['senha']
-        banco = ligar_banco()
-        cursor = banco.cursor()
-        cursor.execute("SELECT id_usuario, nome FROM usuario WHERE email=%s AND senha=%s", (email, senha))
-        usuario = cursor.fetchone()
-        cursor.close()
-        banco.close()
+    email = request.form['email']
+    senha = request.form['senha']
 
-        if usuario:
-            session['Usuario_Logado'] = True
-            session['id_usuario'] = usuario[0]  # id_usuario
-            session['nome_usuario'] = usuario[1]  # nome do usuário
-            session['email'] = email
-            return redirect('/')
-        else:
-            return redirect('/login')
+    banco = ligar_banco()
+    cursor = banco.cursor()
+    cursor.execute("SELECT id_usuario, nome FROM usuario WHERE email=%s AND senha=%s", (email, senha))
+    usuario = cursor.fetchone()
+    cursor.close()
+    banco.close()
 
-    return render_template('login.html')
-
+    if usuario:
+        session['Usuario_Logado'] = True
+        session['id_usuario'] = usuario[0]
+        session['nome_usuario'] = usuario[1]
+        session['email'] = email
+        return redirect('/')
+    else:
+        # Envia uma mensagem para o template
+        erro = "E-mail ou senha incorretos"
+        return render_template('login.html', erro=erro)
 
 
 @app.route('/deslogar')
@@ -145,6 +128,11 @@ def deslogar():
 
 
 # -----------LOGIN--------------
+
+@app.route('/usuarioLogado')
+def usuarioLogado():
+    return render_template('usuarioLogado.html')
+
 
 if __name__ == '__main__':
     app.run()

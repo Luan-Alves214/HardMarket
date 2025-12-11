@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, Blueprint, send_from_directory, send_file, session
 import psycopg2
-import io
+import io  # em binario
 
 
 def ligar_banco():
@@ -161,12 +161,16 @@ def excluirProduto(id):
 def home():
     banco = ligar_banco()
     cursor = banco.cursor()
+
+    # Busca 4 produtos aleatórios para a seção "Mais Vendidos"
     cursor.execute("SELECT id_produto, nome, preco, imagem FROM produto ORDER BY RANDOM() LIMIT 4 ")
     produtosMaisVendidos = cursor.fetchall()
 
+    # Busca 4 produtos aleatórios para a seção "Promoções"
     cursor.execute("SELECT id_produto, nome, preco, imagem FROM produto ORDER BY RANDOM() LIMIT 4 ")
     produtosPromocoes = cursor.fetchall()
 
+    # Busca 4 produtos aleatórios para a seção "Novos Produtos"
     cursor.execute("SELECT id_produto, nome, preco, imagem FROM produto ORDER BY RANDOM() LIMIT 4 ")
     produtosNovos = cursor.fetchall()
 
@@ -185,15 +189,20 @@ def home():
 def produtos():
     banco = ligar_banco()
     cursor = banco.cursor()
+
+    # Busca todos os produtos em ordem aleatória (para a seção "Mais Vendidos")
     cursor.execute("SELECT id_produto, nome, preco, imagem FROM produto ORDER BY RANDOM() ")
     produtosMaisVendidos = cursor.fetchall()
 
+    # Busca novamente todos os produtos em ordem aleatória (para "Promoções")
     cursor.execute("SELECT id_produto, nome, preco, imagem FROM produto ORDER BY RANDOM() ")
     produtosPromocoes = cursor.fetchall()
 
+    # Busca novamente todos os produtos em ordem aleatória (para "Novos Produtos")
     cursor.execute("SELECT id_produto, nome, preco, imagem FROM produto ORDER BY RANDOM()")
     produtosNovos = cursor.fetchall()
 
+    # Busca todas as categorias existentes, sem repetir
     cursor.execute("SELECT DISTINCT categoria FROM produto")
     categorias = [c[0] for c in cursor.fetchall()]
     cursor.close()
@@ -212,6 +221,8 @@ def produtos():
 def verProduto(id_produto):
     banco = ligar_banco()
     cursor = banco.cursor()
+
+    # Busca todas as informações do produto específico pelo ID recebido na rota
     cursor.execute(
         "SELECT id_produto, nome,modelo, preco, imagem, descricao FROM produto WHERE id_produto = %s",
         (id_produto,)
@@ -219,6 +230,8 @@ def verProduto(id_produto):
     produtos = cursor.fetchall()
     cursor.close()
     banco.close()
+
+    # Pega o primeiro item retornado; se estiver vazio, retorna None
     produto = produtos[0] if produtos else None
 
     return render_template('verProduto.html', produto=produto)
@@ -279,10 +292,15 @@ def adicionar_carrinho(id_produto):
 def carrinho():
     if 'Usuario_Logado' not in session:
         return redirect('/login')
+
+    # Cria uma chave única para o carrinho baseado no ID do usuário logado
     user_cart_key = f"carrinho_{session['id_usuario']}"
+
+    # Pega o carrinho da sessão; se não existir, retorna lista vazia
     carrinho = session.get(user_cart_key, [])
-    total_itens = sum(item['quantidade'] for item in carrinho)
-    total_valor = sum(item['preco'] * item['quantidade'] for item in carrinho)
+
+    total_itens = sum(item['quantidade'] for item in carrinho) # Soma total de itens (quantidades)
+    total_valor = sum(item['preco'] * item['quantidade'] for item in carrinho) # Calcula o valor total (preço * quantidade)
     return render_template(
         'carrinho.html',
         carrinho=carrinho,
@@ -297,9 +315,16 @@ def remover_item(id_produto):
         return redirect('/login')
 
     user_cart_key = f"carrinho_{session['id_usuario']}"
-    carrinho = session.get(user_cart_key, [])
+    carrinho = session.get(user_cart_key, []) # Obtém o carrinho atual; se não existir, vira lista vazia
+
+    # Remove do carrinho o item cujo 'id' seja diferente do recebido
+    # (ou seja, mantém tudo, menos o item a remover)
     carrinho = [item for item in carrinho if item['id'] != id_produto]
+
+    # Atualiza o carrinho na sessão
     session[user_cart_key] = carrinho
+
+    # Informa ao Flask que a sessão foi modificada
     session.modified = True
     return redirect('/carrinho')
 
@@ -309,14 +334,19 @@ def aumentar_quantidade(id_produto):
     if 'Usuario_Logado' not in session:
         return redirect('/login')
 
-    user_cart_key = f"carrinho_{session['id_usuario']}"
+    user_cart_key = f"carrinho_{session['id_usuario']}" # Chave única do carrinho baseado no usuário logado
+
+    # Verifica se o carrinho existe na sessão
     if user_cart_key in session:
         carrinho = session[user_cart_key]
+        # Procura o item correto no carrinho
         for item in carrinho:
+            # Quando achar o produto correspondente ao ID...
             if item['id'] == id_produto:
                 item['quantidade'] += 1
-                break
-        session[user_cart_key] = carrinho
+                break # Para o loop, já achou o item
+
+        session[user_cart_key] = carrinho # Atualiza a sessão com o carrinho modificado
         session.modified = True
     return redirect('/carrinho')
 
@@ -331,6 +361,8 @@ def diminuir_quantidade(id_produto):
         carrinho = session[user_cart_key]
         for item in carrinho:
             if item['id'] == id_produto:
+                # Só diminui se a quantidade for maior que 1
+                # (evita ficar com quantidade zero)
                 if item['quantidade'] > 1:
                     item['quantidade'] -= 1
                 break
@@ -347,10 +379,15 @@ def pagamento():
     if 'Usuario_Logado' not in session:
         return redirect('/login')
 
-    user_cart_key = f"carrinho_{session['id_usuario']}"
+
+    user_cart_key = f"carrinho_{session['id_usuario']}" # Chave do carrinho do usuário logado
+
+    # Obtém o carrinho da sessão; se não existir, retorna lista vazia
     carrinho = session.get(user_cart_key, [])
 
+    # Calcula o total de itens (quantidade total)
     total_itens = sum(item['quantidade'] for item in carrinho) if carrinho else 0
+    # Calcula o valor total (preço * quantidade de cada item)
     total_valor = sum(item['preco'] * item['quantidade'] for item in carrinho) if carrinho else 0
 
     return render_template(
@@ -370,16 +407,22 @@ def entrega():
     if 'Usuario_Logado' not in session:
         return redirect('/login')
 
-    user_cart_key = f"carrinho_{session['id_usuario']}"
-    carrinho = session.get(user_cart_key, [])
+    user_cart_key = f"carrinho_{session['id_usuario']}"# Cria a chave do carrinho específica do usuário
 
+    carrinho = session.get(user_cart_key, [])# Obtém o carrinho; se não existir, vira uma lista vazia
+
+    # Calcula o total de itens no carrinho
     total_itens = sum(item['quantidade'] for item in carrinho) if carrinho else 0
+    # Calcula o valor total de todos os itens
     total_valor = sum(item['preco'] * item['quantidade'] for item in carrinho) if carrinho else 0
+
+    # ID do usuário logado
     id_usuario = session['id_usuario']
 
     banco = ligar_banco()
     cursor = banco.cursor()
 
+    # Busca as informações de entrega do usuário
     cursor.execute("""
                    SELECT nome,
                           email,
@@ -399,9 +442,11 @@ def entrega():
     cursor.close()
     banco.close()
 
+    # Se não encontrar o usuário, define como None
     if not usuario_bd:
         usuario = None
     else:
+        # Monta um dicionário com os dados do usuário
         usuario = {
             'nome': usuario_bd[0],
             'email': usuario_bd[1],
@@ -413,7 +458,7 @@ def entrega():
             'cidade': usuario_bd[7],
             'estado': usuario_bd[8],
         }
-
+    # Renderiza a página de entrega com o carrinho e os dados do usuário
     return render_template(
         'entrega.html',
         carrinho=carrinho,
@@ -435,10 +480,12 @@ def confirmacao_pagamento():
     user_cart_key = f"carrinho_{session['id_usuario']}"
     carrinho = session.get(user_cart_key, [])
 
+    # Soma total de itens
     total_itens = sum(item['quantidade'] for item in carrinho) if carrinho else 0
+    # Soma o valor total dos itens
     total_valor = sum(item['preco'] * item['quantidade'] for item in carrinho) if carrinho else 0
 
-    # Zera o carrinho do usuário logado
+    # Limpa o carrinho do usuário depois do pagamento
     session[user_cart_key] = []
     session.modified = True
 
@@ -464,6 +511,7 @@ def favoritos():
 
     id_usuario = session['id_usuario']
 
+    # Busca todos os produtos que o usuário marcou como favoritos
     cursor.execute("""
                    SELECT p.id_produto, p.nome, p.preco, p.imagem
                    FROM favoritos f
@@ -471,6 +519,7 @@ def favoritos():
                    WHERE f.id_usuario = %s
                    ORDER BY f.id_favorito DESC
                    """, (id_usuario,))
+    # Lista de produtos favoritos do usuário
     favoritos = cursor.fetchall()
 
     cursor.close()
@@ -488,7 +537,7 @@ def adicionar_favorito(id_produto):
     cursor = banco.cursor()
     id_usuario = session['id_usuario']
 
-    # Verifica se o produto já está nos favoritos
+    # Verifica se o produto já está na lista de favoritos do usuário
     cursor.execute("""
                    SELECT 1
                    FROM favoritos
@@ -497,6 +546,7 @@ def adicionar_favorito(id_produto):
                    """, (id_usuario, id_produto))
     existe = cursor.fetchone()
 
+    # Se NÃO existir, adiciona aos favoritos
     if not existe:
         cursor.execute("""
                        INSERT INTO favoritos (id_usuario, id_produto)
@@ -518,12 +568,14 @@ def remover_favorito(id_produto):
     cursor = banco.cursor()
     id_usuario = session['id_usuario']
 
+    # Remove o produto da lista de favoritos do usuário
     cursor.execute("""
                    DELETE
                    FROM favoritos
                    WHERE id_usuario = %s
                      AND id_produto = %s
                    """, (id_usuario, id_produto))
+    # Confirma a remoção
     banco.commit()
     cursor.close()
     banco.close()
@@ -535,6 +587,7 @@ def remover_favorito(id_produto):
 # --------------BUSCA----------------
 @bp.route('/buscarProdutos')
 def buscarProdutos():
+    # Pega os parâmetros enviados pela URL (barra de busca e filtros)
     pesquisa = request.args.get('pesquisa', '')
     termo = request.args.get('termo', '')
     preco = request.args.get('preco', '')
@@ -542,15 +595,15 @@ def buscarProdutos():
     banco = ligar_banco()
     cursor = banco.cursor()
 
-    # Buscar categorias (para o select aparecer)
+    # Busca todas as categorias para mostrar no <select>
     cursor.execute("SELECT DISTINCT categoria FROM produto")
     categorias = [c[0] for c in cursor.fetchall()]
 
-    # Montar SQL DINÂMICO
+    # Inicia a query dinâmica
     query = "SELECT id_produto, nome, preco, imagem FROM produto WHERE 1=1"
     params = []
 
-    # Filtro por texto
+    # Filtro por nome (texto)
     if pesquisa:
         query += " AND nome ILIKE %s"
         params.append(f"%{pesquisa}%")
@@ -565,16 +618,18 @@ def buscarProdutos():
         query += " AND preco <= %s"
         params.append(preco)
 
+    # Executa a consulta com os parâmetros montados
     cursor.execute(query, params)
     produtosNovos = cursor.fetchall()
 
-    # Para não quebrar a página
+    # Preenche essas variáveis para não quebrar o template
     produtosPromocoes = []
     produtosMaisVendidos = []
 
     cursor.close()
     banco.close()
 
+    # Renderiza a página com os filtros e os resultados
     return render_template(
         'produtos.html',
         produtosNovos=produtosNovos,
@@ -596,9 +651,13 @@ def usuarioLogado():
     if 'Usuario_Logado' not in session:
         return redirect('/login')
 
+    # Pega o ID do usuário salvo na sessão
     id_usuario = session['id_usuario']
+
     banco = ligar_banco()
     cursor = banco.cursor()
+
+    # Busca todos os dados do usuário no banco
     cursor.execute("""
                    SELECT nome,
                           email,
@@ -616,10 +675,11 @@ def usuarioLogado():
     cursor.close()
     banco.close()
 
+    # Caso não encontre o usuário, volta para o login
     if not usuario_bd:
         return redirect('/login')
 
-    # Monta dicionário com os dados do usuário
+    # Cria um dicionário organizado com os dados retornados do banco
     usuario = {
         'nome': usuario_bd[0],
         'email': usuario_bd[1],
@@ -630,6 +690,7 @@ def usuarioLogado():
         'bairro': usuario_bd[6],
         'cidade': usuario_bd[7],
         'estado': usuario_bd[8],
+        # Gera iniciais do usuário (ex.: "Luan Alves" → "LA")
         'iniciais': ''.join([x[0] for x in usuario_bd[0].split()[:2]]).upper()
     }
 
@@ -646,7 +707,9 @@ def editarUsuario():
     banco = ligar_banco()
     cursor = banco.cursor()
 
+    # Se o formulário foi enviado (POST)
     if request.method == 'POST':
+        # Pega os dados enviados no form
         nome = request.form['nome']
         email = request.form['email']
         telefone = request.form['telefone']
@@ -657,6 +720,7 @@ def editarUsuario():
         cidade = request.form['cidade']
         estado = request.form['estado']
 
+        # Atualiza o registro no banco
         cursor.execute("""
                        UPDATE usuario
                        SET nome=%s,
@@ -674,12 +738,12 @@ def editarUsuario():
         cursor.close()
         banco.close()
 
-        # Atualiza o session['Usuario_Logado'] se tiver algum dado usado na sessão
+        # Atualiza sessão (se você usa o nome do usuário nela)
         session['Usuario_Logado'] = nome
 
         return redirect('/usuarioLogado')
 
-    # GET: carregar dados
+    # Se for GET: carregar dados do usuário para preencher o formulário
     cursor.execute("""
                    SELECT nome,
                           email,
@@ -697,9 +761,11 @@ def editarUsuario():
     cursor.close()
     banco.close()
 
+    # Caso usuário não exista, força login novamente
     if not usuario_bd:
         return redirect('/login')
 
+    # Converte para dicionário (mais fácil de usar no HTML)
     usuario = {
         'nome': usuario_bd[0],
         'email': usuario_bd[1],
@@ -714,6 +780,3 @@ def editarUsuario():
 
     return render_template('editarUsuario.html', usuario=usuario)
 # --------------MINHA CONTA----------------
-
-
-

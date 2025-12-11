@@ -16,6 +16,7 @@ bp = Blueprint('usuario_bp', __name__)
 
 @bp.route('/cadastrarUsuario', methods=['POST'])
 def cadastrarUsuario():
+    # Captura todos os dados enviados pelo formulário
     nome = request.form['nome']
     email = request.form['email']
     senha = request.form['senha']
@@ -29,6 +30,7 @@ def cadastrarUsuario():
     numero = request.form['numero']
     banco = ligar_banco()
     cursor = banco.cursor()
+    # Insere o novo usuário na tabela
     cursor.execute(
         """
         INSERT INTO usuario (nome, email, senha, telefone, data_nascimento, cidade, estado, cep, rua, bairro, numero)

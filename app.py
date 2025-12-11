@@ -99,16 +99,20 @@ def verProduto():
 
 @app.route('/autenticar', methods=["POST"])
 def autenticar():
+    # Recebe os dados enviados pelo formulário de login
     email = request.form['email']
     senha = request.form['senha']
 
     banco = ligar_banco()
     cursor = banco.cursor()
+
+    # Busca o usuário com o e-mail e a senha informados
     cursor.execute("SELECT id_usuario, nome FROM usuario WHERE email=%s AND senha=%s", (email, senha))
     usuario = cursor.fetchone()
     cursor.close()
     banco.close()
 
+    # Se encontrou o usuário, cria a sessão e redireciona para a home
     if usuario:
         session['Usuario_Logado'] = True
         session['id_usuario'] = usuario[0]
@@ -116,7 +120,7 @@ def autenticar():
         session['email'] = email
         return redirect('/')
     else:
-        # Envia uma mensagem para o template
+        # Caso não encontre, devolve o login com mensagem de erro
         erro = "E-mail ou senha incorretos"
         return render_template('login.html', erro=erro)
 
